@@ -285,76 +285,6 @@
             transform: scale(1.1);
         }
 
-        /* Estilos para las tarjetas de adopción */
-        .adoption-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            /* border: 1px dashed red; /* DEBUGGING */
-        }
-        .adoption-card {
-            background-color: #FDF6EC; 
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(121, 85, 72, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            min-height: 420px; /* Asegurar altura mínima para la tarjeta */
-            /* border: 1px dashed blue; /* DEBUGGING */
-        }
-        .adoption-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(121, 85, 72, 0.15);
-        }
-        .adoption-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .adoption-card-content {
-            padding: 1rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .adoption-card-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #8D6E63; 
-            margin-bottom: 0.5rem;
-        }
-        .adoption-card-content .description {
-            font-size: 0.9rem;
-            color: #6D4C41; 
-            margin-bottom: 0.75rem;
-            flex-grow: 1;
-        }
-        .adoption-card-content .details {
-            font-size: 0.85rem;
-            color: #A1887F; 
-            margin-bottom: 1rem;
-        }
-        .adoption-card-content .details p {
-            margin-bottom: 0.25rem;
-        }
-        .adoption-card-content .more-info-btn {
-            background-color: #A1887F;
-            color: white;
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
-            text-align: center;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-            text-decoration: none; 
-            display: inline-block;
-            margin-top: auto; 
-        }
-        .adoption-card-content .more-info-btn:hover {
-            background-color: #8D6E63;
-        }
-
-
         .stars-container {
             display: flex;
             justify-content: center;
@@ -634,7 +564,7 @@
             </div>
 
             <div class="flex flex-col justify-center items-center my-6 md:my-0">
-                <div class="central-image-container" id="catImageContainer"> 
+                <div class="central-image-container"> 
                     <img src="imagenes/imagengato.jpeg" 
                          alt="Gato relajándose en SPAYOGA - Imagen principal de SPAYOGA" 
                          class="central-image"
@@ -805,6 +735,7 @@
             const isAdoptionButton = buttonElement.id === 'adoptionButton';
             const isTermsLink = buttonElement.id === 'termsLink';
 
+            // Lógica para botones de prototipo no funcionales
             if (!isAdoptionButton && !isTermsLink && !isRatingButton && !functionalModals.includes(modalId) ) { 
                 console.log(`Prototipo: La sección para "${modalId}" está en desarrollo.`);
                 return; 
