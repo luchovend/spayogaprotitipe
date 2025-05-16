@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPAYOGA - Prototipo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3D5B5; 
+            color: #5D4037; 
+        }
+        header { 
+            background-color: #E7BC91; 
+            padding-top: 0.5rem; 
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #D4A276; 
+            display: flex; 
+            align-items: center; 
+            padding-left: 1.5rem; 
+            padding-right: 1.5rem;
+            position: relative; 
+        }
+        .header-logo-container { 
+            display: flex;
+            justify-content: center;
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .header-logo { 
+            max-height: 70px; 
+            width: auto; 
+            animation: fadeInDown 1s ease-out;
+            display: block; 
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .header-logo:hover {
+            transform: scale(1.08); 
+        }
+        .adoption-button {
+            background-color: #A1887F; 
+            color: #FFFFFF; 
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: absolute; 
+            right: 1.5rem; 
+            top: 50%;
+            transform: translateY(-50%); 
+            cursor: pointer;
+        }
+        .adoption-button:hover {
+            background-color: #8D6E63; 
+            transform: translateY(-50%) translateY(-1px) scale(1.03); 
+        }
+        .adoption-button i {
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+        .adoption-button:hover i {
+            transform: rotate(10deg);
+        }
+
+        .nav-button {
+            cursor: pointer;
+            padding: 20px 32px; 
+            border-radius: 10px; 
+            font-weight: 500;
+            font-size: 1.15rem; 
+            color: #5D4037; 
+            background-color: #FFFFFF; 
+            box-shadow: 0 4px 8px rgba(93, 64, 55, 0.1); 
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        box-shadow 0.25s ease-out, 
+                        background-color 0.25s ease-out, 
+                        opacity 0.3s ease; 
+            text-align: center;
+            min-width: 220px; 
+        }
+        .nav-button:hover {
+            background-color: #FDF6EC; 
+            color: #5D4037;
+            transform: translateY(-4px) scale(1.03); 
+            box-shadow: 0 10px 20px rgba(93, 64, 55, 0.2); 
+        }
+        .central-image-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(93, 64, 55, 0.15);
+            animation: zoomIn 1s ease-out;
+            background-color: #E7BC91; 
+            width: clamp(340px, 100%, 480px); 
+            aspect-ratio: 1 / 1; 
+            position: relative; 
+        }
+        .central-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            transition: opacity 0.45s ease-in-out; 
+        }
+        
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(93, 64, 55, 0.35); 
+            color: white;
+            border: none;
+            padding: 12px; 
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0; 
+            transition: opacity 0.3s ease-in-out, background-color 0.2s ease, transform 0.2s ease;
+        }
+        .central-image-container:hover .carousel-arrow {
+            opacity: 1; 
+        }
+        .carousel-arrow:hover {
+            background-color: rgba(93, 64, 55, 0.65);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .carousel-arrow.prev {
+            left: 15px;
+        }
+        .carousel-arrow.next {
+            right: 15px;
+        }
+        .carousel-arrow i {
+            font-size: 1.5rem;
+        }
+
+
+        main { 
+            padding-top: 4rem; 
+            padding-bottom: 2rem; 
+        }
+        .main-content-grid { 
+             gap: 24px; 
+        }
+        @media (min-width: 768px) { 
+            .main-content-grid {
+                 gap: 32px; 
+            }
+        }
+
+        .button-panel-background {
+            background: linear-gradient(145deg, rgba(239, 235, 233, 0.55) 0%, rgba(243, 213, 181, 0.2) 100%); 
+            padding: 1.5rem; 
+            border-radius: 16px; 
+            box-shadow: 0 15px 40px rgba(121, 85, 72, 0.08), 0 5px 15px rgba(121, 85, 72, 0.05); 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+        }
+
+
+        .rating-button {
+            cursor: pointer; 
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #A1887F; 
+            background-color: transparent;
+            border: 2px solid #E7BC91; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin-top: 1.5rem;
+            opacity: 1; 
+            transition: all 0.3s ease;
+        }
+        .rating-button:hover {
+            background-color: #FDF6EC; 
+            border-color: #D4A276;
+            color: #8D6E63;
+        }
+        .rating-button i {
+            margin-right: 6px;
+        }
+
+        .animated-button-clone {
+            position: fixed;
+            z-index: 1060; 
+            transition: top 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
+                        left 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
+                        transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
+                        opacity 0.3s ease-out;
+            padding: 20px 32px; 
+            border-radius: 10px; 
+            font-weight: 500;
+            font-size: 1.15rem; 
+            color: #5D4037; 
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(93, 64, 55, 0.2); 
+            text-align: center;
+            will-change: top, left, transform, opacity; 
+            min-width: 220px; 
+        }
+        
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-color: rgba(93, 64, 55, 0.6); 
+            opacity: 0; 
+            transition: opacity 0.3s ease-out;
+        }
+        .modal.active { 
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #FFFFFF; 
+            margin: 0 auto; 
+            padding: 35px; 
+            border-radius: 12px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative; 
+            color: #5D4037; 
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-20px); 
+            transition: max-height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), 
+                        opacity 0.4s ease-out 0.1s, 
+                        transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+            will-change: max-height, opacity, transform;
+            margin-top: 5vh; 
+        }
+        #adopcionesModal .modal-content { 
+            max-width: 950px; 
+        }
+        #ratingModal .modal-content { 
+            max-width: 450px; 
+        }
+
+
+        .modal.active .modal-content.open {
+            max-height: 85vh; 
+            opacity: 1;
+            transform: translateY(0);
+            overflow-y: auto; 
+        }
+
+        .modal-content h2 {
+            color: #8D6E63; 
+            margin-bottom: 25px; 
+            font-size: 2rem; 
+            border-bottom: 2px solid #E7BC91; 
+            padding-bottom: 15px; 
+            text-shadow: 0px 1px 1px rgba(255,255,255,0.6); 
+        }
+        .close-button {
+            color: #A1887F; 
+            position: absolute; 
+            top: 15px;
+            right: 20px;
+            font-size: 30px; 
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+            z-index: 10; 
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #5D4037; 
+            text-decoration: none;
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        /* Estilos para las tarjetas de adopción */
+        .adoption-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            /* border: 1px dashed red; /* DEBUGGING */
+        }
+        .adoption-card {
+            background-color: #FDF6EC; 
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(121, 85, 72, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 420px; /* Asegurar altura mínima para la tarjeta */
+            /* border: 1px dashed blue; /* DEBUGGING */
+        }
+        .adoption-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(121, 85, 72, 0.15);
+        }
+        .adoption-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .adoption-card-content {
+            padding: 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .adoption-card-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #8D6E63; 
+            margin-bottom: 0.5rem;
+        }
+        .adoption-card-content .description {
+            font-size: 0.9rem;
+            color: #6D4C41; 
+            margin-bottom: 0.75rem;
+            flex-grow: 1;
+        }
+        .adoption-card-content .details {
+            font-size: 0.85rem;
+            color: #A1887F; 
+            margin-bottom: 1rem;
+        }
+        .adoption-card-content .details p {
+            margin-bottom: 0.25rem;
+        }
+        .adoption-card-content .more-info-btn {
+            background-color: #A1887F;
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            text-decoration: none; 
+            display: inline-block;
+            margin-top: auto; 
+        }
+        .adoption-card-content .more-info-btn:hover {
+            background-color: #8D6E63;
+        }
+
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .stars-container .star {
+            font-size: 2.5rem; 
+            color: #D7CCC8; 
+            margin: 0 5px;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out, transform 0.1s ease-out;
+        }
+        .stars-container .star:hover {
+            transform: scale(1.15);
+        }
+        .stars-container .star.hover,
+        .stars-container .star.selected {
+            color: #FFB300; 
+        }
+        #ratingDescription {
+            text-align: center;
+            font-size: 1rem;
+            color: #8D6E63; 
+            min-height: 1.5em; 
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        #ratingThankYouMessage {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #5D4037; 
+            margin-bottom: 15px;
+        }
+        #ratingThankYouMessage i.fa-heart {
+            color: #C8ADA0; 
+        }
+        #commentFormContainer { 
+            margin-top: 15px;
+        }
+        #commentFormContainer textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #C8ADA0;
+            border-radius: 6px;
+            min-height: 80px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #5D4037;
+        }
+        #commentFormContainer textarea::placeholder {
+            color: #A1887F;
+        }
+        #commentFormContainer button {
+            background-color: #A1887F;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background-color 0.3s ease;
+        }
+        #commentFormContainer button:hover {
+            background-color: #8D6E63;
+        }
+        #commentSubmitMessage {
+            text-align: center;
+            font-size: 0.9rem;
+            color: green;
+            margin-top: 10px;
+        }
+        
+        .section-divider {
+            border-top: 2px solid #D4A276; 
+            margin-top: 3rem; 
+            margin-bottom: 3rem; 
+            width: 0%; 
+            margin-left: auto;
+            margin-right: auto;
+            animation: drawDivider 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.5s; 
+        }
+        @keyframes drawDivider {
+            to { width: 75%; }
+        }
+
+        .faq-section {
+            padding-bottom: 2rem; 
+            padding-top: 3rem; 
+            position: relative; 
+            background-image: url('imagenes/fondopf.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .faq-section::before { 
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(243, 213, 181, 0.88); 
+            z-index: 1; 
+        }
+        .faq-section > * { 
+            position: relative;
+            z-index: 2;
+        }
+
+        .faq-section h2 { 
+            color: #5D4037; 
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.3); 
+        }
+        .faq-item {
+            background-color: rgba(255, 255, 255, 0.92); 
+            backdrop-filter: blur(3px); 
+        }
+        .faq-question {
+            transition: background-color 0.2s ease-out;
+            color: #5D4037; 
+        }
+        .faq-question:hover {
+            background-color: rgba(253, 246, 236, 0.8); 
+        }
+        .faq-paw-icon {
+            width: 32px; 
+            height: 32px;
+            object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+        }
+        .faq-question.active .faq-paw-icon {
+            transform: rotate(180deg) scale(1.1); 
+        }
+        .faq-answer {
+            color: #6D4C41; 
+            padding-left: 0.5rem; 
+            padding-right: 0.5rem;
+        }
+        .faq-answer p {
+            padding-top: 0.75rem; 
+        }
+
+
+        .footer {
+            background-color: #D4A276; 
+            color: #FFFFFF; 
+            padding: 20px 0; 
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #BCA075; 
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: backwards; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .footer a {
+            color: #FDF6EC; 
+            text-decoration: underline;
+        }
+        .footer a:hover {
+            color: #FFFFFF; 
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp { 
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px; 
+            margin-bottom: 18px; 
+            border: 1px solid #C8ADA0; 
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            font-size: 1rem; 
+            color: #5D4037;
+        }
+        .form-input::placeholder {
+            color: #A1887F;
+        }
+        .form-input:focus {
+            border-color: #8D6E63; 
+            outline: none;
+        }
+        .submit-button { 
+            background-color: #A1887F; 
+            color: white;
+            padding: 14px 24px; 
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.05rem; 
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #8D6E63;
+        }
+
+        .modal-image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 15px; 
+            margin-top: 20px; 
+        }
+        .modal-image {
+            width: 100%;
+            height: 140px; 
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .modal-image:hover {
+            transform: scale(1.05);
+        }
+        .map-container {
+            width: 100%;
+            height: 450px; 
+            border-radius: 8px;
+            overflow: hidden; 
+        }
+
+        .contact-item i {
+            color: #8D6E63; 
+            margin-right: 12px; 
+        }
+        .contact-item a {
+            color: #8D6E63;
+        }
+        .contact-item a:hover {
+            color: #5D4037;
+        }
+        .contact-item {
+            font-size: 1.05rem; 
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header> 
+        <div class="header-logo-container"> 
+            <img src="imagenes/logoformal.png" alt="Logo SPAYOGA" class="header-logo">
+        </div>
+        <button class="adoption-button" id="adoptionButton" data-modal="adopcionesModal">
+            <i class="fas fa-heart"></i> Adopciones
+        </button>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4"> 
+        <div class="grid grid-cols-1 md:grid-cols-3 items-center main-content-grid"> 
+            <div class="button-panel-background animate-fadeInUp" style="animation-delay: 0.2s;">
+                <div class="flex flex-col space-y-8 items-center"> 
+                    <div class="nav-button" data-modal="sobreNosotrosModal">Sobre Nosotros</div>
+                    <div class="nav-button" data-modal="ubicacionModal">Ubicación</div>
+                    <div class="nav-button" data-modal="contactoModal">Contacto</div> </div>
+            </div>
+
+            <div class="flex flex-col justify-center items-center my-6 md:my-0">
+                <div class="central-image-container" id="catImageContainer"> 
+                    <img src="imagenes/imagengato.jpeg" 
+                         alt="Gato relajándose en SPAYOGA - Imagen principal de SPAYOGA" 
+                         class="central-image"
+                         id="carouselImage"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/e6dde9/4b3f4e?text=Imagen+no+disponible';">
+                    <button class="carousel-arrow prev" id="prevCatImage"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-arrow next" id="nextCatImage"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="rating-button" data-modal="ratingModal"> <i class="far fa-star"></i>Calificar SPAYOGA
+                </div>
+            </div>
+
+            <div class="button-panel-background animate-fadeInUp" style="animation-delay: 0.4s;">
+                <div class="flex flex-col space-y-8 items-center"> 
+                    <div class="nav-button" data-modal="experienciasModal">Experiencias</div> <div class="nav-button" data-modal="informacionModal">Información</div> <div class="nav-button" data-modal="felinosModal">Felinos</div>         </div>
+            </div>
+        </div>
+    
+        <div class="section-divider"></div>
+
+        <section class="faq-section container mx-auto px-4"> 
+            <h2 class="text-3xl font-bold text-center mb-10">Preguntas Frecuentes</h2>
+            <div class="space-y-6 max-w-3xl mx-auto">
+                <div class="faq-item bg-white p-5 rounded-lg shadow-md">
+                    <button class="faq-question flex justify-between items-center w-full text-left text-lg font-medium text-gray-700 hover:text-6d5d6e focus:outline-none">
+                        <span class="flex-1">¿Mi gato necesita alguna preparación especial antes de su sesión de SPAYOGA?</span>
+                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0">
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-700 ease-in-out">
+                        <p class="pt-3 text-gray-600">No es necesaria una preparación exhaustiva. Recomendamos que tu gato no coma una comida pesada justo antes de la sesión...</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white p-5 rounded-lg shadow-md"> <button class="faq-question flex justify-between items-center w-full text-left text-lg font-medium text-gray-700 hover:text-6d5d6e focus:outline-none">
+                        <span class="flex-1">¿Qué tipo de productos utilizan? ¿Son seguros para los gatos?</span>
+                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0">
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-700 ease-in-out">
+                        <p class="pt-3 text-gray-600">En SPAYOGA, la seguridad y el bienestar de tu felino son nuestra máxima prioridad. Utilizamos exclusivamente productos naturales, orgánicos y formulados específicamente para gatos, libres de químicos agresivos, parabenos o fragancias artificiales que puedan ser perjudiciales. Todos nuestros aceites de masaje y productos de aromaterapia son 100% seguros y aprobados por veterinarios para uso felino.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white p-5 rounded-lg shadow-md"> <button class="faq-question flex justify-between items-center w-full text-left text-lg font-medium text-gray-700 hover:text-6d5d6e focus:outline-none">
+                        <span class="flex-1">¿Puedo quedarme con mi gato durante la sesión de spa?</span>
+                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0">
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-700 ease-in-out">
+                        <p class="pt-3 text-gray-600">Para garantizar un ambiente de máxima tranquilidad y minimizar cualquier posible estrés para los gatos, generalmente preferimos que los dueños esperen en nuestra cómoda sala de recepción. Sin embargo, entendemos que cada gato y dueño es diferente. Si consideras que tu presencia es crucial para la calma de tu gato, por favor coméntalo al momento de reservar para que podamos evaluar la situación y hacer los arreglos necesarios si es posible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main> 
+
+    <footer class="footer">
+        <div> 
+            <p>© <span id="currentYear"></span> SPAYOGA. Todos los derechos reservados.</p>
+            <p><a href="#" id="termsLink" data-modal="termsModal">Ver Términos y Condiciones</a></p> </div>
+    </footer>
+
+    <div id="sobreNosotrosModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-paw" style="color: #8D6E63; margin-right: 10px;"></i>Sobre Nosotros</h2> <p class="mb-4 text-base md:text-lg">En <strong>SPAYOGA</strong>, entendemos que los gatos no son solo mascotas, son miembros de la familia que merecen lo mejor. Nacimos de la pasión por el bienestar felino y el deseo de crear un espacio único donde los gatos puedan experimentar una relajación profunda y un cuidado especializado.</p> <p class="mb-4 text-base md:text-lg">Nuestra filosofía se centra en la tranquilidad y el respeto por la naturaleza sensible de cada gato. Ofrecemos una experiencia de spa de una hora, cuidadosamente diseñada en etapas, que combina técnicas de masaje suave, aromaterapia segura para felinos, musicoterapia relajante y un entorno sereno que invita al descanso y al ronroneo.</p> <p class="text-base md:text-lg">Creemos que un gato relajado es un gato feliz, y nuestra misión es proporcionar ese oasis de calma para tu compañero bigotudo. ¡Ven y descubre por qué SPAYOGA es el paraíso preferido de los gatos!</p> </div> </div>
+    <div id="ubicacionModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-map-marker-alt" style="color: #8D6E63; margin-right: 10px;"></i>Ubicación</h2> <p class="mb-4 text-base md:text-lg">Encuéntranos en el corazón de la ciudad...</p> <div class="map-container"> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086436128009!2d144.95373531590412!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d5f3600979e3!2sFederation%20Square!5e0!3m2!1ses!2sar!4v1652712186504!5m2!1ses!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> </div> <a href="https://maps.app.goo.gl/525DyHKWu5vavMV57" target="_blank" class="mt-6 inline-block text-white py-3 px-6 rounded hover:bg-8D6E63 transition-colors duration-300 text-lg" style="background-color: #A1887F;">Abrir en Google Maps</a> </div> </div>
+    <div id="contactoModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-address-book" style="color: #8D6E63; margin-right: 10px;"></i>Contacto</h2> <p class="mb-4 contact-item text-lg"><i class="fas fa-phone-alt"></i><strong>Número de celular:</strong> <a href="tel:+543765233400" class="hover:underline text-brown-700">+54 3765 233400</a></p> <p class="mb-4 contact-item text-lg"><i class="fas fa-envelope"></i><strong>Correo:</strong> <a href="mailto:spayogaemp@gmail.com" class="hover:underline text-brown-700">spayogaemp@gmail.com</a></p> <p class="contact-item text-lg"><i class="fab fa-instagram"></i><strong>Instagram:</strong> <a href="https://instagram.com/SpaYogaok" target="_blank" class="hover:underline text-brown-700">@SpaYogaok</a></p> </div> </div>
+    <div id="experienciasModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-star" style="color: #8D6E63; margin-right: 10px;"></i>Experiencias SPAYOGA</h2> <p class="mb-4 text-base md:text-lg">Nuestros clientes felinos (¡y sus humanos!) nos otorgan <strong>5 estrellas de satisfacción</strong>. [Más testimonios y galería de fotos próximamente...]</p> <div class="modal-image-grid grid-cols-2"> <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+1" alt="Gatito feliz 1 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+2" alt="Gatito feliz 2 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> </div> </div> </div>
+    <div id="informacionModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-info-circle" style="color: #8D6E63; margin-right: 10px;"></i>Solicitar Información</h2> <p class="mb-6 text-base md:text-lg">¿Interesado en regalarle a tu gato una experiencia SPAYOGA? Completa el formulario y nos pondremos en contacto contigo.</p> <form id="contactForm"> <input type="text" name="nombre" placeholder="Nombre y Apellido" class="form-input" required> <input type="email" name="email" placeholder="Correo Electrónico" class="form-input" required> <input type="tel" name="telefono" placeholder="Número de Teléfono" class="form-input" required> <input type="text" name="localidad" placeholder="Localidad" class="form-input" required> <button type="submit" class="submit-button">Enviar Formulario</button> </form> <div id="formMessage" class="mt-4 text-center"></div> </div> </div>
+    <div id="felinosModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-cat" style="color: #8D6E63; margin-right: 10px;"></i>Universo Felino</h2> <p class="mb-4 text-base md:text-lg">[Contenido de la sección Felinos en desarrollo. ¡Pronto más curiosidades sobre nuestros amigos bigotudos!]</p> </div> </div>
+    <div id="termsModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-file-contract" style="color: #8D6E63; margin-right: 10px;"></i>Términos y Condiciones</h2> <p class="mb-4 text-base md:text-lg">Bienvenido a SPAYOGA... [Términos completos en desarrollo]</p> </div> </div>
+
+    <div id="ratingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-award" style="color: #8D6E63; margin-right: 10px;"></i>Califica tu Experiencia</h2>
+            <div id="ratingStarsContent">
+                <p class="text-center mb-2 text-lg">Por favor, selecciona tu calificación:</p>
+                <div class="stars-container" id="starsContainer">
+                    <i class="fas fa-star star" data-value="1"></i>
+                    <i class="fas fa-star star" data-value="2"></i>
+                    <i class="fas fa-star star" data-value="3"></i>
+                    <i class="fas fa-star star" data-value="4"></i>
+                    <i class="fas fa-star star" data-value="5"></i>
+                </div>
+                <div id="ratingDescription"></div> 
+            </div>
+            <div id="ratingThankYouMessage" style="display: none;">
+            </div>
+            <div id="commentFormContainer" style="display: none;">
+                <textarea id="ratingComment" placeholder="Cuéntanos más sobre tu experiencia para ayudarnos a mejorar..."></textarea>
+                <button id="submitRatingComment">Enviar Comentario</button>
+                <div id="commentSubmitMessage" style="display:none;">¡Comentario enviado, gracias!</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="adopcionesModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-paw" style="color: #8D6E63; margin-right: 10px;"></i> Adopta un Amigo Felino</h2>
+            <p class="text-center mb-8 text-lg">En SPAYOGA, también creemos en dar segundas oportunidades. Conoce a algunos de nuestros adorables felinos que buscan un hogar lleno de amor y ronroneos.</p>
+            <div class="adoption-grid">
+                <div class="adoption-card">
+                    <img src="imagenes/Adopcion1.jpg" alt="Gato en adopción Mochi" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Mochi';">
+                    <div class="adoption-card-content">
+                        <h3>Mochi</h3>
+                        <p class="description">Un explorador juguetón y mimoso, siempre listo para una nueva aventura o una buena siesta al sol.</p>
+                        <div class="details">
+                            <p><strong>Sexo:</strong> Macho</p>
+                            <p><strong>Edad Estimada:</strong> 1 año</p>
+                            <p><strong>Carácter:</strong> Curioso y afectuoso</p>
+                        </div>
+                        <button class="more-info-btn">Conocer Más</button>
+                    </div>
+                </div>
+                <div class="adoption-card">
+                    <img src="imagenes/Adopcion2.jpg" alt="Gato en adopción Leo" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Leo';">
+                    <div class="adoption-card-content">
+                        <h3>Leo</h3>
+                        <p class="description">Un caballero tranquilo y observador, amante de las caricias suaves y las tardes de contemplación.</p>
+                        <div class="details">
+                            <p><strong>Sexo:</strong> Macho</p>
+                            <p><strong>Edad Estimada:</strong> 3 años</p>
+                            <p><strong>Carácter:</strong> Sereno y gentil</p>
+                        </div>
+                        <button class="more-info-btn">Conocer Más</button>
+                    </div>
+                </div>
+                <div class="adoption-card">
+                    <img src="imagenes/Adopcion3.jpg" alt="Gato en adopción Cleo" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Cleo';">
+                    <div class="adoption-card-content">
+                        <h3>Cleo</h3>
+                        <p class="description">Una dulce princesa que adora los mimos y busca un regazo cálido donde acurrucarse.</p>
+                        <div class="details">
+                            <p><strong>Sexo:</strong> Hembra</p>
+                            <p><strong>Edad Estimada:</strong> 2 años</p>
+                            <p><strong>Carácter:</strong> Tierna y hogareña</p>
+                        </div>
+                        <button class="more-info-btn">Conocer Más</button>
+                    </div>
+                </div>
+                <div class="adoption-card">
+                    <img src="imagenes/Adopcion4.jpg" alt="Gato en adopción Simba" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Simba';">
+                    <div class="adoption-card-content">
+                        <h3>Simba</h3>
+                        <p class="description">Un espíritu aventurero con un corazón de oro, siempre buscando un compañero de juegos.</p>
+                        <div class="details">
+                            <p><strong>Sexo:</strong> Macho</p>
+                            <p><strong>Edad Estimada:</strong> 1.5 años</p>
+                            <p><strong>Carácter:</strong> Enérgico y leal</p>
+                        </div>
+                        <button class="more-info-btn">Conocer Más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentAnimatedButton = null;
+        let originalButtonProps = null;
+        let buttonClone = null;
+
+        const functionalModals = ['sobreNosotrosModal', 'ubicacionModal']; 
+
+        function openAnimatedModal(modalId, buttonElement) {
+            const isNavButton = buttonElement.classList.contains('nav-button');
+            const targetModal = document.getElementById(modalId);
+            
+            if (!targetModal) return; 
+
+            const isRatingButton = buttonElement.classList.contains('rating-button');
+            const isAdoptionButton = buttonElement.id === 'adoptionButton';
+            const isTermsLink = buttonElement.id === 'termsLink';
+
+            if (!isAdoptionButton && !isTermsLink && !isRatingButton && !functionalModals.includes(modalId) ) { 
+                console.log(`Prototipo: La sección para "${modalId}" está en desarrollo.`);
+                return; 
+            }
+            
+            const shouldAnimateButton = isNavButton && functionalModals.includes(modalId);
+
+
+            const targetModalContent = targetModal.querySelector('.modal-content');
+
+            originalButtonProps = {
+                rect: buttonElement.getBoundingClientRect(),
+                text: buttonElement.innerHTML,
+                isAnimated: shouldAnimateButton 
+            };
+            
+            if (shouldAnimateButton) { 
+                buttonElement.style.opacity = '0'; 
+                buttonElement.style.pointerEvents = 'none'; 
+
+
+                buttonClone = document.createElement('div');
+                buttonClone.innerHTML = originalButtonProps.text;
+                buttonClone.classList.add('animated-button-clone');
+                
+                buttonClone.style.top = `${originalButtonProps.rect.top}px`;
+                buttonClone.style.left = `${originalButtonProps.rect.left}px`;
+                buttonClone.style.width = `${originalButtonProps.rect.width}px`;
+                buttonClone.style.height = `${originalButtonProps.rect.height}px`;
+                document.body.appendChild(buttonClone);
+
+                requestAnimationFrame(() => { 
+                    buttonClone.style.top = '8vh'; 
+                    buttonClone.style.left = '50%';
+                    buttonClone.style.transform = 'translateX(-50%) scale(1.1)';
+                    buttonClone.style.opacity = '1';
+                });
+
+                buttonClone.addEventListener('transitionend', function onCloneAtTop(event) {
+                    if (event.target === buttonClone && (event.propertyName === 'transform' || event.propertyName === 'top' || event.propertyName === 'left')) {
+                        buttonClone.removeEventListener('transitionend', onCloneAtTop);
+                        buttonClone.style.transform = 'translateX(-50%) scale(1)'; 
+                        
+                        displayModalContent(targetModal, targetModalContent);
+                        
+                        setTimeout(() => {
+                            if (buttonClone) buttonClone.style.opacity = '0';
+                        }, 400); 
+                    }
+                });
+            } else { 
+                 displayModalContent(targetModal, targetModalContent);
+            }
+
+            if (modalId === 'ratingModal') { 
+                resetRatingModal();
+            }
+            document.body.style.overflow = 'hidden';
+        }
+
+        function displayModalContent(modalElement, modalContentElement) {
+            modalElement.style.display = 'flex'; 
+            modalElement.style.alignItems = 'flex-start'; 
+            modalElement.style.justifyContent = 'center';
+            requestAnimationFrame(() => {
+                modalElement.classList.add('active'); 
+                modalContentElement.classList.add('open'); 
+            });
+        }
+
+
+        function closeAnimatedModal(modalElement) {
+            const modalContent = modalElement.querySelector('.modal-content');
+            
+            modalContent.classList.remove('open'); 
+
+            modalContent.addEventListener('transitionend', function onPersianaClosed(event) {
+                 if (event.target !== modalContent || (event.propertyName !== 'max-height' && event.propertyName !== 'opacity')) return;
+                modalContent.removeEventListener('transitionend', onPersianaClosed);
+
+                modalElement.classList.remove('active'); 
+                
+                modalElement.addEventListener('transitionend', function onBackdropFaded(event) {
+                    if (event.target !== modalElement || event.propertyName !== 'opacity') return;
+                    modalElement.removeEventListener('transitionend', onBackdropFaded);
+                    modalElement.style.display = 'none';
+
+                    if (originalButtonProps && originalButtonProps.isAnimated && buttonClone) {
+                        buttonClone.style.opacity = '1'; 
+                        buttonClone.style.top = `${originalButtonProps.rect.top}px`;
+                        buttonClone.style.left = `${originalButtonProps.rect.left}px`;
+                        buttonClone.style.transform = 'translateX(0) scale(1)';
+
+                        buttonClone.addEventListener('transitionend', function onCloneReturned(event) {
+                            if (event.target === buttonClone && (event.propertyName === 'transform' || event.propertyName === 'top' || event.propertyName === 'left')) {
+                                buttonClone.removeEventListener('transitionend', onCloneReturned);
+                                
+                                const originalBtn = document.querySelector(`[data-modal="${modalElement.id}"], #${modalElement.id.replace('Modal','Link')}`);
+                                if (originalBtn) {
+                                    originalBtn.style.opacity = '1'; 
+                                    originalBtn.style.pointerEvents = 'auto'; 
+                                }
+                                
+                                if (buttonClone) buttonClone.remove();
+                                buttonClone = null;
+                                originalButtonProps = null; 
+                            }
+                        });
+                    } else {
+                        const originalBtn = document.querySelector(`[data-modal="${modalElement.id}"], #${modalElement.id.replace('Modal','Link')}`);
+                        if (originalBtn) {
+                             originalBtn.style.opacity = '1'; 
+                             originalBtn.style.pointerEvents = 'auto'; 
+                        }
+                        originalButtonProps = null; 
+                        if (buttonClone) { 
+                           buttonClone.remove();
+                           buttonClone = null;
+                        }
+                    }
+
+                    if (!Array.from(document.querySelectorAll('.modal.active')).length) {
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+        }
+
+        document.querySelectorAll('.nav-button, .rating-button, #termsLink, #adoptionButton').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const modalId = e.currentTarget.getAttribute('data-modal');
+                if (modalId) { 
+                   openAnimatedModal(modalId, e.currentTarget);
+                }
+            });
+        });
+        
+
+        document.querySelectorAll('.modal .close-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const modalToClose = e.currentTarget.closest('.modal');
+                closeAnimatedModal(modalToClose);
+            });
+        });
+        
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) { 
+                    closeAnimatedModal(modal);
+                }
+            });
+        });
+
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                formMessage.textContent = '¡Gracias! Tu formulario ha sido enviado. Nos pondremos en contacto pronto.';
+                formMessage.className = 'mt-4 text-center text-green-600 text-lg'; 
+                contactForm.reset(); 
+                setTimeout(() => {
+                    formMessage.textContent = ''; 
+                }, 3000); 
+            });
+        }
+
+        const starsContainer = document.getElementById('starsContainer');
+        const stars = starsContainer ? starsContainer.querySelectorAll('.star') : [];
+        const ratingDescription = document.getElementById('ratingDescription');
+        const ratingStarsContent = document.getElementById('ratingStarsContent');
+        const ratingThankYouMessage = document.getElementById('ratingThankYouMessage');
+        const commentFormContainer = document.getElementById('commentFormContainer'); 
+        const submitRatingCommentButton = document.getElementById('submitRatingComment');
+        const commentSubmitMessage = document.getElementById('commentSubmitMessage');
+
+        const ratingTexts = {
+            0: "", 1: "Muy insatisfecho/a", 2: "Insatisfecho/a", 3: "Neutral", 4: "Satisfecho/a", 5: "Muy satisfecho/a"
+        };
+        let ratingSubmitted = false; 
+        let currentRating = 0; 
+
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                star.classList.toggle('hover', star.dataset.value <= rating);
+                if (!ratingSubmitted) star.classList.remove('selected');
+            });
+            if (ratingDescription && !ratingSubmitted) ratingDescription.textContent = ratingTexts[rating] || "";
+        }
+        
+        function setRatingDisplay(rating) {
+            stars.forEach(star => {
+                star.classList.toggle('selected', star.dataset.value <= rating);
+                star.classList.remove('hover');
+            });
+            if (ratingDescription) ratingDescription.textContent = ratingTexts[rating] || "";
+        }
+
+        function resetRatingModal() {
+            currentRating = 0; ratingSubmitted = false;
+            if (ratingStarsContent) ratingStarsContent.style.display = 'block';
+            if (ratingThankYouMessage) { ratingThankYouMessage.style.display = 'none'; ratingThankYouMessage.innerHTML = ''; }
+            if (commentFormContainer) commentFormContainer.style.display = 'none';
+            if (document.getElementById('ratingComment')) document.getElementById('ratingComment').value = '';
+            if (commentSubmitMessage) commentSubmitMessage.style.display = 'none';
+            if (ratingDescription) ratingDescription.textContent = "";
+            setRatingDisplay(0); 
+        }
+        
+        if (starsContainer) {
+            starsContainer.addEventListener('mouseover', (event) => {
+                if (ratingSubmitted || !event.target.classList.contains('star')) return;
+                highlightStars(event.target.dataset.value);
+            });
+            starsContainer.addEventListener('mouseout', () => {
+                if (ratingSubmitted) return;
+                highlightStars(currentRating); 
+                if (ratingDescription) ratingDescription.textContent = ratingTexts[currentRating] || "";
+            });
+        }
+
+        stars.forEach(star => {
+            star.addEventListener('click', (event) => {
+                if (ratingSubmitted) return;
+                currentRating = parseInt(event.target.dataset.value); 
+                ratingSubmitted = true; 
+                setRatingDisplay(currentRating);
+                
+                if (ratingStarsContent) ratingStarsContent.style.display = 'none'; 
+                
+                if (ratingThankYouMessage) {
+                    if (currentRating <= 3) { 
+                        ratingThankYouMessage.innerHTML = `Lamentamos tu experiencia en SPAYOGA. <i class="far fa-sad-tear" style="color: #4a5568;"></i>`;
+                        if (commentFormContainer) commentFormContainer.style.display = 'block'; 
+                    } else {
+                        ratingThankYouMessage.innerHTML = `¡Gracias por calificarnos con ${currentRating} estrella${currentRating > 1 ? 's' : ''}! <i class="fas fa-heart" style="color: #C8ADA0;"></i>`;
+                        if (commentFormContainer) commentFormContainer.style.display = 'none'; 
+                    }
+                    ratingThankYouMessage.style.display = 'block';
+                }
+            });
+        });
+
+        if(submitRatingCommentButton) {
+            submitRatingCommentButton.addEventListener('click', () => {
+                // const comment = ratingCommentTextarea.value; 
+                if (commentFormContainer) commentFormContainer.style.display = 'none';
+                if (commentSubmitMessage) {
+                    commentSubmitMessage.style.display = 'block';
+                     setTimeout(() => { 
+                        commentSubmitMessage.style.display = 'none';
+                    }, 3000);
+                }
+            });
+        }
+
+
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const pawIcon = button.querySelector('.faq-paw-icon');
+                const isActive = button.classList.contains('active');
+                
+                button.classList.toggle('active', !isActive);
+                
+                if (answer.style.maxHeight && answer.style.maxHeight !== '0px') { 
+                    answer.style.maxHeight = '0px';
+                    if(pawIcon) pawIcon.style.transform = 'rotate(0deg)';
+                } else { 
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    if(pawIcon) pawIcon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        const catImages = [
+            "imagenes/imagengato.jpeg", 
+            "imagenes/gatito2.jpg",
+            "imagenes/gatito4.jpg",
+            "imagenes/gatito5.jpg"
+        ];
+        let currentImageIndex = 0;
+        const carouselImageElement = document.getElementById('carouselImage');
+        const prevCatImageButton = document.getElementById('prevCatImage');
+        const nextCatImageButton = document.getElementById('nextCatImage');
+
+        function showCatImage(index) {
+            if (carouselImageElement) {
+                carouselImageElement.style.opacity = '0'; 
+                setTimeout(() => {
+                    carouselImageElement.src = catImages[index];
+                    carouselImageElement.style.opacity = '1'; 
+                }, 250); 
+            }
+        }
+
+        if (prevCatImageButton && nextCatImageButton && carouselImageElement) {
+            prevCatImageButton.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                currentImageIndex--;
+                if (currentImageIndex < 0) {
+                    currentImageIndex = catImages.length - 1; 
+                }
+                showCatImage(currentImageIndex);
+            });
+
+            nextCatImageButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex++;
+                if (currentImageIndex >= catImages.length) {
+                    currentImageIndex = 0; 
+                }
+                showCatImage(currentImageIndex);
+            });
+        }
+
+    </script>
+</body>
+</html>
