@@ -13,6 +13,7 @@
             background-color: #F3D5B5; 
             color: #5D4037; 
         }
+        /* Estilos base (móvil primero) para el header */
         header { 
             background-color: #E7BC91; 
             padding-top: 0.5rem; 
@@ -20,8 +21,8 @@
             border-bottom: 1px solid #D4A276; 
             display: flex; 
             align-items: center; 
-            padding-left: 1.5rem; 
-            padding-right: 1.5rem;
+            padding-left: 0.75rem; /* Padding móvil */
+            padding-right: calc(0.75rem + 95px); /* Padding móvil derecho para dejar espacio al botón Adopciones */
             position: relative; 
         }
         .header-logo-container { 
@@ -31,7 +32,7 @@
             margin-right: auto; 
         }
         .header-logo { 
-            max-height: 70px; 
+            max-height: 50px; /* Logo más pequeño para móvil */
             width: auto; 
             animation: fadeInDown 1s ease-out;
             display: block; 
@@ -43,17 +44,17 @@
         .adoption-button {
             background-color: #A1887F; 
             color: #FFFFFF; 
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+            padding: 0.4rem 0.7rem; /* Padding reducido para móvil */
+            border-radius: 6px;    /* Radio reducido para móvil */
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.75rem;   /* Fuente reducida para móvil */
             transition: background-color 0.3s ease, transform 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            gap: 0.25rem;         /* Gap reducido para móvil */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             position: absolute; 
-            right: 1.5rem; 
+            right: 0.75rem;       /* Alineado con padding-left del header */
             top: 50%;
             transform: translateY(-50%); 
             cursor: pointer;
@@ -63,12 +64,36 @@
             transform: translateY(-50%) translateY(-1px) scale(1.03); 
         }
         .adoption-button i {
-            font-size: 0.9rem;
+            font-size: 0.7rem; /* Icono más pequeño para móvil */
             transition: transform 0.3s ease;
         }
         .adoption-button:hover i {
             transform: rotate(10deg);
         }
+
+        /* Estilos de header para pantallas medianas y grandes */
+        @media (min-width: 768px) {
+            header {
+                padding-top: 0.5rem; 
+                padding-bottom: 0.5rem; /* Reajustado para consistencia */
+                padding-left: 1.5rem; 
+                padding-right: 1.5rem; /* Padding original para desktop */
+            }
+            .header-logo {
+                max-height: 70px; /* Tamaño original del logo para desktop */
+            }
+            .adoption-button {
+                padding: 0.6rem 1.2rem; /* Padding original */
+                font-size: 0.95rem;   /* Fuente original */
+                gap: 0.5rem;         /* Gap original */
+                border-radius: 8px;    /* Radio original */
+                right: 1.5rem;       /* Posición original */
+            }
+            .adoption-button i {
+                font-size: 0.9rem; /* Icono original */
+            }
+        }
+
 
         .nav-button {
             cursor: pointer;
@@ -734,11 +759,12 @@
             const isRatingButton = buttonElement.classList.contains('rating-button');
             const isAdoptionButton = buttonElement.id === 'adoptionButton';
             const isTermsLink = buttonElement.id === 'termsLink';
-
-            // Lógica para botones de prototipo no funcionales
-            if (!isAdoptionButton && !isTermsLink && !isRatingButton && !functionalModals.includes(modalId) ) { 
-                console.log(`Prototipo: La sección para "${modalId}" está en desarrollo.`);
-                return; 
+            
+            // Permitir que todos los modales definidos se abran, excepto los explícitamente no funcionales del prototipo
+            const nonFunctionalPrototypeModals = ['contactoModal', 'experienciasModal', 'informacionModal', 'felinosModal'];
+            if (nonFunctionalPrototypeModals.includes(modalId) && !functionalModals.includes(modalId)) {
+                 console.log(`Prototipo: La sección para "${modalId}" está en desarrollo.`);
+                 return;
             }
             
             const shouldAnimateButton = isNavButton && functionalModals.includes(modalId);
