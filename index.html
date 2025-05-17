@@ -3,742 +3,822 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPAYOGA - Prototipo</title>
+    <title>SPAYOGA - Prototipo Mejorado</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F3D5B5; 
-            color: #5D4037; 
+            background-color: #FFFBF5;
+            color: #4A3B32;
+            scroll-behavior: smooth;
         }
-        header { 
-            background-color: #E7BC91; 
-            padding: 0.75rem 1rem; 
-            border-bottom: 1px solid #D4A276; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            position: relative; 
-        }
-        .header-logo { 
-            max-height: 55px; 
-            width: auto; 
-            animation: fadeInDown 1s ease-out;
-            display: block; 
-            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            margin-right: auto; 
-        }
-        .header-logo:hover {
-            transform: scale(1.08); 
-        }
-        .adoption-button {
-            background-color: #A1887F; 
-            color: #FFFFFF; 
-            padding: 0.4rem 0.8rem; 
-            border-radius: 6px;    
-            font-weight: 500;
-            font-size: 0.8rem;   
-            transition: background-color 0.3s ease, transform 0.2s ease;
+
+        header {
+            background: linear-gradient(135deg, #E7BC91 0%, #D4A276 100%);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #C8936A;
             display: flex;
             align-items: center;
-            gap: 0.3rem;         
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(93, 64, 55, 0.1);
+        }
+        .header-logo {
+            max-height: 60px;
+            width: auto;
+            animation: fadeInDown 1s ease-out;
+            display: block;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), filter 0.3s ease;
+            margin-right: auto;
+        }
+        .header-logo:hover {
+            transform: scale(1.1) rotate(-2deg);
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+        }
+        .adoption-button {
+            background-color: #A0522D;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.1) inset;
+            border: 1px solid transparent;
             cursor: pointer;
-            flex-shrink: 0; 
+            flex-shrink: 0;
         }
         .adoption-button:hover {
-            background-color: #8D6E63; 
-            transform: translateY(-1px) scale(1.03); 
+            background-color: #8B4513;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.1) inset;
+            border-color: #FFFFFF;
         }
         .adoption-button i {
-            font-size: 0.7rem; 
-            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+            transition: transform 0.4s ease-out;
         }
         .adoption-button:hover i {
-            transform: rotate(10deg);
+            transform: rotate(15deg) scale(1.1);
         }
 
         @media (min-width: 768px) {
             header {
-                padding: 0.5rem 1.5rem; 
-                justify-content: center; 
+                padding: 0.6rem 2rem;
+                justify-content: center;
             }
             .header-logo {
-                max-height: 70px; 
-                margin-right: 0; 
+                max-height: 75px;
+                margin-right: 0;
             }
             .adoption-button {
-                position: absolute; 
-                right: 1.5rem;
+                position: absolute;
+                right: 2rem;
                 top: 50%;
-                transform: translateY(-50%); 
-                padding: 0.6rem 1.2rem; 
-                font-size: 0.95rem;   
-                gap: 0.5rem;         
-                border-radius: 8px;    
+                transform: translateY(-50%);
+                padding: 0.7rem 1.4rem;
+                font-size: 1rem;
+                gap: 0.6rem;
+                border-radius: 10px;
             }
-            .adoption-button:hover { 
-                transform: translateY(-50%) translateY(-1px) scale(1.03); 
+            .adoption-button:hover {
+                transform: translateY(-50%) translateY(-2px) scale(1.05);
             }
             .adoption-button i {
-                font-size: 0.9rem; 
+                font-size: 1rem;
             }
         }
-
 
         .nav-button {
             cursor: pointer;
-            padding: 20px 32px; 
-            border-radius: 10px; 
-            font-weight: 500;
-            font-size: 1.15rem; 
-            color: #5D4037; 
-            background-color: #FFFFFF; 
-            box-shadow: 0 4px 8px rgba(93, 64, 55, 0.1); 
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                        box-shadow 0.25s ease-in-out, 
-                        background-color 0.25s ease-in-out, 
-                        opacity 0.3s ease-out; 
+            padding: 22px 35px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #4A3B32;
+            background: linear-gradient(145deg, #FFFFFF 0%, #FDF6EC 100%);
+            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.12), 0 2px 5px rgba(0,0,0,0.05) inset;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
-            min-width: 220px; 
+            min-width: 240px;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .nav-button:hover::before {
+            left: 150%;
         }
         .nav-button:hover {
-            background-color: #FDF6EC; 
-            color: #5D4037;
-            transform: translateY(-4px) scale(1.03); 
-            box-shadow: 0 10px 20px rgba(93, 64, 55, 0.2); 
+            background: linear-gradient(145deg, #FDF6EC 0%, #FAF0E6 100%);
+            color: #A0522D;
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 12px 25px rgba(93, 64, 55, 0.18), 0 3px 7px rgba(0,0,0,0.08) inset;
         }
+        .nav-button:active {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 6px 12px rgba(93, 64, 55, 0.15), 0 1px 3px rgba(0,0,0,0.06) inset;
+        }
+
         .central-image-container {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(93, 64, 55, 0.15);
-            animation: zoomIn 1s ease-out;
-            background-color: #E7BC91; 
-            width: clamp(340px, 100%, 480px); 
-            aspect-ratio: 1 / 1; 
-            position: relative; 
+            box-shadow: 0 12px 28px rgba(93, 64, 55, 0.2), 0 0 15px rgba(231, 188, 145, 0.5) inset;
+            animation: zoomIn 1.2s ease-out;
+            background-color: #E7BC91;
+            width: clamp(320px, 100%, 500px);
+            aspect-ratio: 1 / 1;
+            position: relative;
         }
         .central-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; 
-            transition: opacity 0.45s ease-in-out; 
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
-        
+        .central-image-container:hover .central-image {
+            transform: scale(1.05);
+        }
         .carousel-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(93, 64, 55, 0.35); 
+            background-color: rgba(74, 59, 50, 0.45);
             color: white;
             border: none;
-            padding: 12px; 
+            padding: 14px;
             cursor: pointer;
             border-radius: 50%;
             z-index: 10;
-            opacity: 0; 
-            transition: opacity 0.3s ease-in-out, background-color 0.2s ease, transform 0.2s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, background-color 0.2s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .central-image-container:hover .carousel-arrow {
-            opacity: 1; 
+            opacity: 1;
         }
         .carousel-arrow:hover {
-            background-color: rgba(93, 64, 55, 0.65);
-            transform: translateY(-50%) scale(1.1);
+            background-color: rgba(74, 59, 50, 0.75);
+            transform: translateY(-50%) scale(1.15);
         }
-        .carousel-arrow.prev {
-            left: 15px;
-        }
-        .carousel-arrow.next {
-            right: 15px;
-        }
-        .carousel-arrow i {
-            font-size: 1.5rem;
-        }
+        .carousel-arrow.prev { left: 18px; }
+        .carousel-arrow.next { right: 18px; }
+        .carousel-arrow i { font-size: 1.6rem; }
 
-
-        main { 
-            padding-top: 4rem; 
-            padding-bottom: 2rem; 
+        main {
+            padding-top: 4rem;
+            padding-bottom: 3rem;
         }
-        .main-content-grid { 
-             gap: 24px; 
-        }
-        @media (min-width: 768px) { 
-            .main-content-grid {
-                 gap: 32px; 
-            }
-        }
+        .main-content-grid { gap: 28px; }
+        @media (min-width: 768px) { .main-content-grid { gap: 36px; } }
 
         .button-panel-background {
-            background: linear-gradient(145deg, rgba(239, 235, 233, 0.55) 0%, rgba(243, 213, 181, 0.2) 100%); 
-            padding: 1.5rem; 
-            border-radius: 16px; 
-            box-shadow: 0 15px 40px rgba(121, 85, 72, 0.08), 0 5px 15px rgba(121, 85, 72, 0.05); 
-            display: flex; 
+            background: linear-gradient(150deg, rgba(255, 251, 245, 0.7) 0%, rgba(243, 213, 181, 0.3) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 18px 45px rgba(121, 85, 72, 0.1), 0 6px 18px rgba(121, 85, 72, 0.07);
+            display: flex;
             flex-direction: column;
-            align-items: center; 
+            align-items: center;
         }
 
-
         .rating-button {
-            cursor: pointer; 
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #A1887F; 
+            cursor: pointer;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #A0522D;
             background-color: transparent;
-            border: 2px solid #E7BC91; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 2px solid #D4A276;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
             text-align: center;
-            margin-top: 1.5rem;
-            opacity: 1; 
+            margin-top: 2rem;
+            opacity: 1;
             transition: all 0.3s ease;
         }
         .rating-button:hover {
-            background-color: #FDF6EC; 
-            border-color: #D4A276;
-            color: #8D6E63;
+            background-color: #FFFBF5;
+            border-color: #A0522D;
+            color: #8B4513;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 15px rgba(160, 82, 45, 0.2);
         }
         .rating-button i {
-            margin-right: 6px;
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+        .rating-button:hover i {
+            transform: scale(1.2) rotate(-10deg);
         }
 
         .animated-button-clone {
             position: fixed;
-            z-index: 1060; 
-            transition: top 0.4s ease-in-out, 
-                        left 0.4s ease-in-out, 
-                        transform 0.4s ease-in-out, 
-                        opacity 0.3s ease-out; 
-            padding: 20px 32px; 
-            border-radius: 10px; 
-            font-weight: 500;
-            font-size: 1.15rem; 
-            color: #5D4037; 
+            z-index: 1060;
+            transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+                        left 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+                        transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+                        opacity 0.4s ease-out;
+            padding: 22px 35px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #4A3B32;
             background-color: #ffffff;
-            box-shadow: 0 6px 12px rgba(93, 64, 55, 0.2); 
+            box-shadow: 0 8px 18px rgba(93, 64, 55, 0.25);
             text-align: center;
-            will-change: top, left, transform, opacity; 
-            min-width: 220px; 
+            will-change: top, left, transform, opacity;
+            min-width: 240px;
         }
-        
+
         .modal {
-            display: none; 
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; 
-            background-color: rgba(93, 64, 55, 0.6); 
-            opacity: 0; 
-            transition: opacity 0.3s ease-out;
+            overflow: hidden;
+            background-color: rgba(74, 59, 50, 0.7);
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
         }
-        .modal.active { 
-            opacity: 1;
-        }
+        .modal.active { opacity: 1; }
 
         .modal-content {
-            background-color: #FFFFFF; 
-            margin: 0 auto; 
-            padding: 35px; 
-            border-radius: 12px;
-            width: 90%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative; 
-            color: #5D4037; 
+            background-color: #FFFBF5;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 16px;
+            width: 92%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            position: relative;
+            color: #4A3B32;
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transform: translateY(-20px); 
-            transition: max-height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), 
-                        opacity 0.4s ease-out 0.1s, 
-                        transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+            transform: translateY(-25px) scale(0.98);
+            transition: max-height 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+                        opacity 0.5s ease-out 0.15s,
+                        transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
             will-change: max-height, opacity, transform;
-            margin-top: 5vh; 
+            margin-top: 4vh;
         }
-        #adopcionesModal .modal-content { 
-            max-width: 950px; 
-        }
-        #ratingModal .modal-content { 
-            max-width: 450px; 
-        }
-
+        #adopcionesModal .modal-content { max-width: 1000px; }
+        #ratingModal .modal-content { max-width: 480px; }
 
         .modal.active .modal-content.open {
-            max-height: 85vh; 
+            max-height: 90vh;
             opacity: 1;
-            transform: translateY(0);
-            overflow-y: auto; 
+            transform: translateY(0) scale(1);
+            overflow-y: auto;
         }
 
         .modal-content h2 {
-            color: #8D6E63; 
-            margin-bottom: 25px; 
-            font-size: 2rem; 
-            border-bottom: 2px solid #E7BC91; 
-            padding-bottom: 15px; 
-            text-shadow: 0px 1px 1px rgba(255,255,255,0.6); 
+            font-family: 'Pacifico', cursive;
+            color: #A0522D;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            border-bottom: 3px solid #E7BC91;
+            padding-bottom: 18px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+            text-align: center;
+        }
+        .modal-content h2 i {
+            margin-right: 15px;
+            color: #C8936A;
         }
         .close-button {
-            color: #A1887F; 
-            position: absolute; 
-            top: 15px;
-            right: 20px;
-            font-size: 30px; 
+            color: #B08D57;
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 34px;
             font-weight: bold;
-            transition: color 0.3s ease, transform 0.2s ease;
-            z-index: 10; 
+            transition: color 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+            line-height: 1;
         }
         .close-button:hover,
         .close-button:focus {
-            color: #5D4037; 
+            color: #8B4513;
             text-decoration: none;
             cursor: pointer;
-            transform: scale(1.1);
+            transform: scale(1.2) rotate(90deg);
         }
 
-        /* Estilos para las tarjetas de adopción */
         .adoption-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
         }
         .adoption-card {
-            background-color: #FDF6EC; 
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(121, 85, 72, 0.1);
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(121, 85, 72, 0.12), 0 0 0 1px #F0E2D2;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
             display: flex;
             flex-direction: column;
-            min-height: 420px; 
+            min-height: 450px;
         }
         .adoption-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(121, 85, 72, 0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(121, 85, 72, 0.18), 0 0 0 2px #D4A276;
         }
         .adoption-card img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+        .adoption-card:hover img {
+            transform: scale(1.1);
         }
         .adoption-card-content {
-            padding: 1rem;
+            padding: 1.25rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         .adoption-card-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #8D6E63; 
-            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 0.75rem;
         }
         .adoption-card-content .description {
-            font-size: 0.9rem;
-            color: #6D4C41; 
-            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: #5D4037;
+            margin-bottom: 1rem;
             flex-grow: 1;
+            line-height: 1.6;
         }
         .adoption-card-content .details {
-            font-size: 0.85rem;
-            color: #A1887F; 
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #A1887F;
+            margin-bottom: 1.25rem;
         }
         .adoption-card-content .details p {
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
         }
         .adoption-card-content .more-info-btn {
-            background-color: #A1887F;
+            background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
             color: white;
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
             text-align: center;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-            text-decoration: none; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-block;
-            margin-top: auto; 
+            margin-top: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .adoption-card-content .more-info-btn:hover {
-            background-color: #8D6E63;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-
 
         .stars-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 1rem; 
         }
         .stars-container .star {
-            font-size: 2.5rem; 
-            color: #D7CCC8; 
-            margin: 0 5px;
+            font-size: 2.8rem;
+            color: #D7CCC8;
+            margin: 0 6px;
             cursor: pointer;
-            transition: color 0.2s ease-in-out, transform 0.1s ease-out;
+            transition: color 0.25s ease-in-out, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .stars-container .star:hover {
-            transform: scale(1.15);
+            transform: scale(1.25) rotate(5deg);
         }
         .stars-container .star.hover,
         .stars-container .star.selected {
-            color: #FFB300; 
+            color: #FFC107;
+            text-shadow: 0 0 10px #FFC107, 0 0 5px #FFC107;
         }
         #ratingDescription {
             text-align: center;
-            font-size: 1rem;
-            color: #8D6E63; 
-            min-height: 1.5em; 
-            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #8D6E63;
+            min-height: 1.6em;
+            margin-bottom: 22px;
             font-style: italic;
+            transition: opacity 0.3s ease;
         }
         #ratingThankYouMessage {
             text-align: center;
-            font-size: 1.25rem;
-            color: #5D4037; 
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: #4A3B32;
+            margin-bottom: 18px;
         }
         #ratingThankYouMessage i.fa-heart {
-            color: #C8ADA0; 
+            color: #D4A276;
+            animation: pulseHeart 1.5s infinite;
         }
-        #commentFormContainer { 
-            margin-top: 15px;
+        @keyframes pulseHeart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
         #commentFormContainer textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #C8ADA0;
-            border-radius: 6px;
-            min-height: 80px;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            color: #5D4037;
-        }
-        #commentFormContainer textarea::placeholder {
-            color: #A1887F;
+            border: 1px solid #D4A276;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05) inset;
         }
         #commentFormContainer button {
-            background-color: #A1887F;
-            color: white;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: background-color 0.3s ease;
+            background-color: #A0522D;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         #commentFormContainer button:hover {
-            background-color: #8D6E63;
+            background-color: #8B4513;
+            transform: scale(1.03);
         }
-        #commentSubmitMessage {
-            text-align: center;
-            font-size: 0.9rem;
-            color: green;
-            margin-top: 10px;
-        }
-        
+
         .section-divider {
-            border-top: 2px solid #D4A276; 
-            margin-top: 3rem; 
-            margin-bottom: 3rem; 
-            width: 0%; 
+            border-top: 3px dashed #D4A276;
+            margin-top: 3.5rem;
+            margin-bottom: 3.5rem;
+            width: 0%;
             margin-left: auto;
             margin-right: auto;
-            animation: drawDivider 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.5s; 
+            animation: drawDivider 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.6s;
+            opacity: 0.7;
         }
         @keyframes drawDivider {
-            to { width: 75%; }
+            to { width: 65%; opacity: 0.7; }
         }
 
         .faq-section {
-            padding-bottom: 2rem; 
-            padding-top: 3rem; 
-            position: relative; 
+            padding-bottom: 3rem;
+            padding-top: 3.5rem;
+            position: relative;
             background-image: url('imagenes/fondopf.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed;
         }
-        .faq-section::before { 
+        .faq-section::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(243, 213, 181, 0.88); 
-            z-index: 1; 
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 251, 245, 0.92);
+            z-index: 1;
         }
-        .faq-section > * { 
-            position: relative;
-            z-index: 2;
-        }
-
-        .faq-section h2 { 
-            color: #5D4037; 
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.3); 
+        .faq-section > * { position: relative; z-index: 2; }
+        .faq-section h2 {
+            color: #4A3B32;
+            text-shadow: 1px 1px 2px rgba(231, 188, 145, 0.5);
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8rem;
         }
         .faq-item {
-            background-color: rgba(255, 255, 255, 0.92); 
-            backdrop-filter: blur(3px); 
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(93,64,55,0.08);
+            transition: box-shadow 0.3s ease;
+        }
+        .faq-item:hover {
+            box-shadow: 0 8px 20px rgba(93,64,55,0.12);
         }
         .faq-question {
-            transition: background-color 0.2s ease-out;
-            color: #5D4037; 
+            transition: background-color 0.25s ease-out, color 0.25s ease-out;
+            color: #5D4037;
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
         }
         .faq-question:hover {
-            background-color: rgba(253, 246, 236, 0.8); 
+            background-color: rgba(253, 246, 236, 0.9);
+            color: #A0522D;
         }
         .faq-paw-icon {
-            width: 32px; 
-            height: 32px;
+            width: 36px;
+            height: 36px;
             object-fit: contain;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            filter: drop-shadow(0 0 3px rgba(161, 136, 127, 0.5));
         }
         .faq-question.active .faq-paw-icon {
-            transform: rotate(180deg) scale(1.1); 
+            transform: rotate(360deg) scale(1.15);
         }
         .faq-answer {
-            color: #6D4C41; 
-            padding-left: 0.5rem; 
-            padding-right: 0.5rem;
+            color: #6D4C41;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-bottom: 1.25rem;
+            line-height: 1.7;
         }
         .faq-answer p {
-            padding-top: 0.75rem; 
+            padding-top: 1rem;
         }
 
-        /* Nueva Sección de Medios de Pago */
         .new-payment-methods-section {
-            background-color: #FDF6EC; 
-            padding: 3rem 1rem 4rem 1rem;
+            background-color: #FDF6EC;
+            padding: 4rem 1rem 5rem 1rem;
             text-align: center;
         }
         .new-payment-methods-section h2 {
-            color: #5D4037;
-            font-size: 2.5rem; 
+            color: #4A3B32;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
-            text-shadow: 1px 1px 3px rgba(212, 162, 118, 0.3); 
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(212, 162, 118, 0.4);
+            font-family: 'Pacifico', cursive;
         }
         .new-payment-methods-section .intro-text {
             color: #8D6E63;
-            margin-bottom: 2.5rem;
-            max-width: 700px; 
+            margin-bottom: 3rem;
+            max-width: 750px;
             margin-left: auto;
             margin-right: auto;
-            font-size: 1.1rem; 
-            line-height: 1.7;
+            font-size: 1.15rem;
+            line-height: 1.75;
         }
         .payment-card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-            gap: 2rem; 
-            max-width: 900px; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 950px;
             margin-left: auto;
             margin-right: auto;
         }
         .payment-card {
             background-color: #FFFFFF;
-            border-radius: 12px; 
-            border: 1px solid #E7BC91; 
-            box-shadow: 0 5px 15px rgba(121, 85, 72, 0.07);
-            padding: 1.75rem 1.5rem; 
-            text-align: left; 
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            border-radius: 16px;
+            border: 1px solid #E7BC91;
+            box-shadow: 0 6px 18px rgba(121, 85, 72, 0.09), 0 2px 5px rgba(231,188,145,0.3) inset;
+            padding: 2rem 1.75rem;
+            text-align: left;
+            transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
             display: flex;
             flex-direction: column;
-            min-height: 220px; 
+            min-height: 240px;
         }
         .payment-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 25px rgba(121, 85, 72, 0.12);
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 12px 30px rgba(121, 85, 72, 0.15), 0 3px 7px rgba(231,188,145,0.5) inset;
         }
         .payment-card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
         .payment-card-icon {
-            font-size: 2.2rem; 
-            color: #A1887F; 
-            margin-right: 0.75rem;
-            width: 40px; 
+            font-size: 2.5rem;
+            color: #A0522D;
+            margin-right: 1rem;
+            width: 45px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .payment-card:hover .payment-card-icon {
+            transform: scale(1.2);
         }
         .payment-card-title {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 600;
-            color: #5D4037;
+            color: #4A3B32;
         }
         .payment-card-description {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #6D4C41;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-            flex-grow: 1; 
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
         }
         .payment-card-footer {
-            margin-top: auto; 
-            padding-top: 0.75rem;
-            border-top: 1px solid #F3E5F5; 
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #F3E5F5;
         }
         .payment-card-footer span, .payment-card-footer i {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #A1887F;
-            margin-right: 0.5rem;
+            margin-right: 0.6rem;
         }
-        .payment-card-footer .fab { 
-             font-size: 1.5rem;
-             margin-right: 0.3rem;
+        .payment-card-footer .fab {
+             font-size: 1.6rem;
+             margin-right: 0.4rem;
+             opacity: 0.8;
+             transition: opacity 0.3s ease, color 0.3s ease;
         }
-
+        .payment-card:hover .payment-card-footer .fab {
+            opacity: 1;
+            color: #A0522D;
+        }
 
         .footer {
-            background-color: #D4A276; 
-            color: #FFFFFF; 
-            padding: 20px 0; 
+            background: linear-gradient(135deg, #4A3B32 0%, #5D4037 100%);
+            color: #FDF6EC;
+            padding: 25px 0;
             text-align: center;
-            font-size: 0.9rem;
-            border-top: 1px solid #BCA075; 
-            animation: fadeInUp 1s ease-out 0.5s;
-            animation-fill-mode: backwards; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
+            font-size: 0.95rem;
+            border-top: 2px solid #C8936A;
+            animation: fadeInUp 1.2s ease-out 0.6s;
+            animation-fill-mode: backwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 0.5rem;
         }
         .footer a {
-            color: #FDF6EC; 
-            text-decoration: underline;
+            color: #E7BC91;
+            text-decoration: none;
+            border-bottom: 1px dotted #E7BC91;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
         }
         .footer a:hover {
-            color: #FFFFFF; 
+            color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(-35px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.8); }
+            from { opacity: 0; transform: scale(0.85); }
             to { opacity: 1; transform: scale(1); }
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(35px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes fadeIn { 
+        @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        @keyframes slideInUp { 
-            from { opacity: 0; transform: translateY(50px); }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(55px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .form-input {
             width: 100%;
-            padding: 12px; 
-            margin-bottom: 18px; 
-            border: 1px solid #C8ADA0; 
-            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #D4A276;
+            border-radius: 8px;
             box-sizing: border-box;
-            transition: border-color 0.3s ease;
-            font-size: 1rem; 
-            color: #5D4037;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.05rem;
+            color: #4A3B32;
+            background-color: #FFFDF9;
         }
         .form-input::placeholder {
             color: #A1887F;
+            opacity: 0.8;
         }
         .form-input:focus {
-            border-color: #8D6E63; 
+            border-color: #A0522D;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2);
         }
-        .submit-button { 
-            background-color: #A1887F; 
+        .submit-button {
+            background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
             color: white;
-            padding: 14px 24px; 
+            padding: 16px 28px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.05rem; 
-            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }
         .submit-button:hover {
-            background-color: #8D6E63;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .modal-image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 1rem; 
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.25rem;
         }
         .modal-image {
             width: 100%;
-            height: 150px; 
+            height: 160px;
             object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.12); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+            border: 2px solid transparent;
         }
         .modal-image:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.22);
+            filter: brightness(1.1);
+            border-color: #D4A276;
         }
         .map-container {
             width: 100%;
-            height: 450px; 
-            border-radius: 8px;
-            overflow: hidden; 
+            height: 480px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .contact-item i {
-            color: #8D6E63; 
-            margin-right: 12px; 
+            color: #A0522D;
+            margin-right: 14px;
+            width: 20px;
+            text-align: center;
         }
         .contact-item a {
-            color: #8D6E63;
+            color: #8B4513;
+            text-decoration: none;
+            position: relative;
+        }
+        .contact-item a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: #A0522D;
+            transition: width 0.3s ease;
+        }
+        .contact-item a:hover::after {
+            width: 100%;
         }
         .contact-item a:hover {
-            color: #5D4037;
+            color: #A0522D;
         }
         .contact-item {
-            font-size: 1.05rem; 
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
         }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDF6EC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4A276;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C8936A;
+        }
+
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <header> 
-        <img src="imagenes/logoformal.png" alt="Logo SPAYOGA" class="header-logo">
+    <header>
+        <img src="imagenes/logoformal.png" alt="Logo SPAYOGA" class="header-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x75/E7BC91/4A3B32?text=SPAYOGA';">
         <button class="adoption-button" id="adoptionButton" data-modal="adopcionesModal">
             <i class="fas fa-heart"></i> Adopciones
         </button>
     </header>
 
-    <main class="flex-grow container mx-auto px-4"> 
-        <div class="grid grid-cols-1 md:grid-cols-3 items-center main-content-grid"> 
+    <main class="flex-grow container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 items-center main-content-grid">
             <div class="button-panel-background animate-fadeInUp" style="animation-delay: 0.2s;">
-                <div class="flex flex-col space-y-8 items-center"> 
+                <div class="flex flex-col space-y-8 items-center">
                     <div class="nav-button" data-modal="sobreNosotrosModal">Sobre Nosotros</div>
                     <div class="nav-button" data-modal="ubicacionModal">Ubicación</div>
-                    <div class="nav-button" data-modal="contactoModal">Contacto</div> </div>
+                    <div class="nav-button" data-modal="contactoModal">Contacto</div>
+                </div>
             </div>
 
             <div class="flex flex-col justify-center items-center my-6 md:my-0">
-                <div class="central-image-container"> 
-                    <img src="imagenes/imagengato.jpeg" 
-                         alt="Gato relajándose en SPAYOGA - Imagen principal de SPAYOGA" 
+                <div class="central-image-container">
+                    <img src="imagenes/imagengato.jpeg"
+                         alt="Gato relajándose en SPAYOGA - Imagen principal de SPAYOGA"
                          class="central-image"
                          id="carouselImage"
-                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/e6dde9/4b3f4e?text=Imagen+no+disponible';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/500x500/E7BC91/4A3B32?text=SPAYOGA+Cat';">
                     <button class="carousel-arrow prev" id="prevCatImage"><i class="fas fa-chevron-left"></i></button>
                     <button class="carousel-arrow next" id="nextCatImage"><i class="fas fa-chevron-right"></i></button>
                 </div>
@@ -747,167 +827,253 @@
             </div>
 
             <div class="button-panel-background animate-fadeInUp" style="animation-delay: 0.4s;">
-                <div class="flex flex-col space-y-8 items-center"> 
-                    <div class="nav-button" data-modal="experienciasModal">Experiencias</div> <div class="nav-button" data-modal="informacionModal">Información</div> <div class="nav-button" data-modal="felinosModal">Felinos</div>         </div>
+                <div class="flex flex-col space-y-8 items-center">
+                    <div class="nav-button" data-modal="experienciasModal">Experiencias</div>
+                    <div class="nav-button" data-modal="informacionModal">Información</div>
+                    <div class="nav-button" data-modal="felinosModal">Felinos</div>
+                </div>
             </div>
         </div>
-    
+
         <div class="section-divider"></div>
 
-        <section class="faq-section container mx-auto px-4"> 
-            <h2 class="text-3xl font-bold text-center mb-10">Preguntas Frecuentes</h2>
+        <section class="faq-section container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
             <div class="space-y-6 max-w-3xl mx-auto">
-                <div class="faq-item bg-white p-5 rounded-lg shadow-md">
-                    <button class="faq-question flex justify-between items-center w-full text-left text-lg font-medium text-gray-700 hover:text-6d5d6e focus:outline-none">
+                <div class="faq-item">
+                    <button class="faq-question flex justify-between items-center w-full text-left text-lg">
                         <span class="flex-1">¿Mi gato necesita alguna preparación especial antes de su sesión de SPAYOGA?</span>
-                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0">
+                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/36x36/D4A276/FFFFFF?text=🐾';">
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-700 ease-in-out">
-                        <p class="pt-3 text-gray-600">No es necesaria una preparación exhaustiva. Recomendamos que tu gato no coma una comida pesada justo antes de la sesión...</p>
+                        <p>No es necesaria una preparación exhaustiva. Recomendamos que tu gato no coma una comida pesada justo antes de la sesión para asegurar su máxima comodidad. Un gato relajado y sin el estómago lleno disfrutará mucho más de los masajes y la tranquilidad del ambiente. Asegúrate también de que sus uñas estén recientemente cortadas si es posible, para la seguridad de nuestros terapeutas y para que tu gato se sienta más cómodo durante las manipulaciones suaves.</p>
                     </div>
                 </div>
-                <div class="faq-item bg-white p-5 rounded-lg shadow-md"> <button class="faq-question flex justify-between items-center w-full text-left text-lg font-medium text-gray-700 hover:text-6d5d6e focus:outline-none">
+                <div class="faq-item">
+                    <button class="faq-question flex justify-between items-center w-full text-left text-lg">
                         <span class="flex-1">¿Qué tipo de productos utilizan? ¿Son seguros para los gatos?</span>
-                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0">
+                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/36x36/D4A276/FFFFFF?text=🐾';">
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-700 ease-in-out">
-                        <p class="pt-3 text-gray-600">En SPAYOGA, la seguridad y el bienestar de tu felino son nuestra máxima prioridad. Utilizamos exclusivamente productos naturales, orgánicos y formulados específicamente para gatos, libres de químicos agresivos, parabenos o fragancias artificiales que puedan ser perjudiciales. Todos nuestros aceites de masaje y productos de aromaterapia son 100% seguros y aprobados por veterinarios para uso felino.</p>
+                        <p>En SPAYOGA, la seguridad y el bienestar de tu felino son nuestra máxima prioridad. Utilizamos exclusivamente productos naturales, orgánicos y formulados específicamente para gatos, libres de químicos agresivos, parabenos o fragancias artificiales que puedan ser perjudiciales. Todos nuestros aceites de masaje, esencias de aromaterapia y productos de limpieza son 100% seguros y aprobados por veterinarios para uso felino, garantizando una experiencia placentera y sin riesgos.</p>
                     </div>
                 </div>
-                <div class="faq-item bg-white p-5 rounded-lg shadow-md"> <button class="faq-question flex justify-between items-center w-full text-left text-lg font-medium text-gray-700 hover:text-6d5d6e focus:outline-none">
+                <div class="faq-item">
+                    <button class="faq-question flex justify-between items-center w-full text-left text-lg">
                         <span class="flex-1">¿Puedo quedarme con mi gato durante la sesión de spa?</span>
-                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0">
+                        <img src="imagenes/huellita.png" alt="Huella" class="faq-paw-icon ml-4 flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/36x36/D4A276/FFFFFF?text=🐾';">
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-700 ease-in-out">
-                        <p class="pt-3 text-gray-600">Para garantizar un ambiente de máxima tranquilidad y minimizar cualquier posible estrés para los gatos, generalmente preferimos que los dueños esperen en nuestra cómoda sala de recepción. Sin embargo, entendemos que cada gato y dueño es diferente. Si consideras que tu presencia es crucial para la calma de tu gato, por favor coméntalo al momento de reservar para que podamos evaluar la situación y hacer los arreglos necesarios si es posible.</p>
+                        <p>Para garantizar un ambiente de máxima tranquilidad y minimizar cualquier posible estrés tanto para tu gato como para otros felinos presentes, generalmente preferimos que los dueños esperen en nuestra cómoda y relajante sala de recepción. Hemos comprobado que los gatos tienden a adaptarse mejor y a disfrutar más plenamente de la experiencia cuando el entorno es exclusivamente felino y terapéutico. Sin embargo, entendemos que cada gato y dueño es diferente. Si consideras que tu presencia es crucial para la calma de tu gato, por favor coméntalo al momento de reservar para que podamos evaluar la situación y hacer los arreglos necesarios si es posible, siempre priorizando el bienestar general.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <div class="section-divider"></div>
+
         <section class="new-payment-methods-section">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-4">Facilitamos tu Experiencia de Pago</h2>
-                <p class="intro-text text-center mb-12 max-w-3xl mx-auto">
-                    En SPAYOGA, tu comodidad es primordial. Por ello, ofrecemos diversas opciones seguras y prácticas para que elijas la que mejor se adapte a ti al momento de consentir a tu felino.
+                <h2 class="text-4xl font-bold text-center mb-6">Facilitamos tu Experiencia de Pago</h2>
+                <p class="intro-text text-center mb-16 max-w-3xl mx-auto">
+                    En SPAYOGA, tu comodidad es primordial. Por ello, ofrecemos diversas opciones seguras y prácticas para que elijas la que mejor se adapte a ti al momento de consentir a tu felino con una experiencia de relajación inigualable.
                 </p>
                 <div class="payment-card-grid">
                     <div class="payment-card">
                         <div class="payment-card-header">
                             <i class="fas fa-credit-card payment-card-icon"></i>
-                            <h3 class="payment-card-title">Tarjetas de Crédito y Débito</h3>
+                            <h3 class="payment-card-title">Tarjetas Premium</h3>
                         </div>
-                        <p class="payment-card-description">Aceptamos las principales tarjetas para pagos rápidos y seguros.</p>
+                        <p class="payment-card-description">Aceptamos las principales tarjetas de crédito y débito para pagos rápidos, seguros y sin complicaciones.</p>
                         <div class="payment-card-footer">
                             <i class="fab fa-cc-visa" title="Visa"></i>
                             <i class="fab fa-cc-mastercard" title="Mastercard"></i>
                             <i class="fab fa-cc-amex" title="American Express"></i>
-                            <span>y otras...</span>
+                            <span>y otras principales...</span>
                         </div>
                     </div>
                     <div class="payment-card">
                         <div class="payment-card-header">
-                             <img src="https://img.icons8.com/color/48/000000/mercado-pago.png" alt="Mercado Pago" class="w-8 h-8 mr-2 opacity-90"/>
+                             <img src="https://img.icons8.com/color/60/000000/mercado-pago.png" alt="Mercado Pago" class="w-10 h-10 mr-3 opacity-90 payment-card-icon"/>
                             <h3 class="payment-card-title">Mercado Pago</h3>
                         </div>
-                        <p class="payment-card-description">Utiliza tu cuenta de Mercado Pago para una transacción ágil y protegida.</p>
+                        <p class="payment-card-description">Utiliza tu cuenta de Mercado Pago para una transacción ágil, protegida y con todas las facilidades que ofrece la plataforma.</p>
                         <div class="payment-card-footer">
-                            <span>Procesamiento inmediato</span>
+                            <i class="fas fa-shield-alt"></i><span>Transacción Protegida</span>
                         </div>
                     </div>
-                    <div class="payment-card">
+                     <div class="payment-card">
                         <div class="payment-card-header">
                             <i class="fas fa-university payment-card-icon"></i>
-                            <h3 class="payment-card-title">Transferencia Bancaria</h3>
+                            <h3 class="payment-card-title">Transferencia Directa</h3>
                         </div>
-                        <p class="payment-card-description">Realiza pagos directamente a nuestra cuenta bancaria de forma segura y confiable.</p>
+                        <p class="payment-card-description">Realiza pagos directamente a nuestra cuenta bancaria. Simple, seguro y confiable desde tu home banking.</p>
                          <div class="payment-card-footer">
-                            <span>Confirmación en 24-48 hs</span>
+                            <i class="fas fa-stopwatch"></i><span>Confirmación rápida</span>
                         </div>
                     </div>
                     <div class="payment-card">
                         <div class="payment-card-header">
                             <i class="fas fa-money-bill-wave payment-card-icon"></i>
-                            <h3 class="payment-card-title">Efectivo</h3>
+                            <h3 class="payment-card-title">Efectivo en Local</h3>
                         </div>
-                        <p class="payment-card-description">Puedes abonar en efectivo directamente en nuestras instalaciones al momento del servicio.</p>
+                        <p class="payment-card-description">Puedes abonar en efectivo directamente en nuestras instalaciones al momento de recibir el servicio para tu felino.</p>
                         <div class="payment-card-footer">
-                            <span>Pago en el local</span>
+                           <i class="fas fa-store-alt"></i> <span>Abona al visitarnos</span>
                         </div>
                     </div>
-                     <div class="payment-card">
+                    <div class="payment-card">
                         <div class="payment-card-header">
                             <i class="fas fa-qrcode payment-card-icon"></i>
-                            <h3 class="payment-card-title">Pagos con QR</h3>
+                            <h3 class="payment-card-title">Pagos con QR Dinámico</h3>
                         </div>
-                        <p class="payment-card-description">Escanea el código QR con tu aplicación de pagos móviles preferida.</p>
+                        <p class="payment-card-description">Escanea el código QR con tu aplicación de pagos móviles preferida. Una opción moderna, rápida y sin contacto.</p>
                          <div class="payment-card-footer">
-                            <span>Rápido y sin contacto</span>
+                            <i class="fas fa-mobile-alt"></i><span>Rápido y sin contacto</span>
                         </div>
                     </div>
-                     <div class="payment-card">
+                    <div class="payment-card">
                         <div class="payment-card-header">
                             <i class="fas fa-gift payment-card-icon"></i>
-                            <h3 class="payment-card-title">Tarjetas de Regalo SPAYOGA</h3>
+                            <h3 class="payment-card-title">Gift Cards SPAYOGA</h3>
                         </div>
-                        <p class="payment-card-description">¡El regalo perfecto! Canjea tu tarjeta de regalo SPAYOGA por cualquiera de nuestros servicios.</p>
+                        <p class="payment-card-description">¡El regalo perfecto para un amante de los gatos! Canjea tu tarjeta de regalo SPAYOGA por cualquiera de nuestros servicios de bienestar felino.</p>
                         <div class="payment-card-footer">
-                            <span>Consulta por nuestras gift cards</span>
+                            <i class="fas fa-paw"></i><span>Regala Bienestar Felino</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    </main> 
+    </main>
 
     <footer class="footer">
-        <div> 
-            <p>© <span id="currentYear"></span> SPAYOGA. Todos los derechos reservados.</p>
-            <p><a href="#" id="termsLink" data-modal="termsModal">Ver Términos y Condiciones</a></p> </div>
+        <div>
+            <p class="text-lg">© <span id="currentYear"></span> SPAYOGA. Todos los derechos reservados.</p>
+            <p class="text-sm"><a href="#" id="termsLink" data-modal="termsModal">Ver Términos y Condiciones de Servicio</a></p>
+        </div>
     </footer>
 
-    <div id="sobreNosotrosModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-paw" style="color: #8D6E63; margin-right: 10px;"></i>Sobre Nosotros</h2> <p class="mb-4 text-base md:text-lg">En <strong>SPAYOGA</strong>, entendemos que los gatos no son solo mascotas, son miembros de la familia que merecen lo mejor. Nacimos de la pasión por el bienestar felino y el deseo de crear un espacio único donde los gatos puedan experimentar una relajación profunda y un cuidado especializado.</p> <p class="mb-4 text-base md:text-lg">Nuestra filosofía se centra en la tranquilidad y el respeto por la naturaleza sensible de cada gato. Ofrecemos una experiencia de spa de una hora, cuidadosamente diseñada en etapas, que combina técnicas de masaje suave, aromaterapia segura para felinos, musicoterapia relajante y un entorno sereno que invita al descanso y al ronroneo.</p> <p class="text-base md:text-lg">Creemos que un gato relajado es un gato feliz, y nuestra misión es proporcionar ese oasis de calma para tu compañero bigotudo. ¡Ven y descubre por qué SPAYOGA es el paraíso preferido de los gatos!</p> </div> </div>
-    <div id="ubicacionModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-map-marker-alt" style="color: #8D6E63; margin-right: 10px;"></i>Ubicación</h2> <p class="mb-4 text-base md:text-lg">Encuéntranos en el corazón de la ciudad...</p> <div class="map-container"> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086436128009!2d144.95373531590412!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d5f3600979e3!2sFederation%20Square!5e0!3m2!1ses!2sar!4v1652712186504!5m2!1ses!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> </div> <a href="https://maps.app.goo.gl/525DyHKWu5vavMV57" target="_blank" class="mt-6 inline-block text-white py-3 px-6 rounded hover:bg-8D6E63 transition-colors duration-300 text-lg" style="background-color: #A1887F;">Abrir en Google Maps</a> </div> </div>
-    <div id="contactoModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-address-book" style="color: #8D6E63; margin-right: 10px;"></i>Contacto</h2> <p class="mb-4 contact-item text-lg"><i class="fas fa-phone-alt"></i><strong>Número de celular:</strong> <a href="tel:+543765233400" class="hover:underline text-brown-700">+54 3765 233400</a></p> <p class="mb-4 contact-item text-lg"><i class="fas fa-envelope"></i><strong>Correo:</strong> <a href="mailto:spayogaemp@gmail.com" class="hover:underline text-brown-700">spayogaemp@gmail.com</a></p> <p class="contact-item text-lg"><i class="fab fa-instagram"></i><strong>Instagram:</strong> <a href="https://instagram.com/SpaYogaok" target="_blank" class="hover:underline text-brown-700">@SpaYogaok</a></p> </div> </div>
-    <div id="experienciasModal" class="modal"> 
-        <div class="modal-content"> 
-            <span class="close-button">×</span> 
-            <h2><i class="fas fa-star" style="color: #8D6E63; margin-right: 10px;"></i>Experiencias SPAYOGA</h2> 
-            <p class="mb-4 text-base md:text-lg">Nuestros clientes felinos (¡y sus humanos!) nos otorgan <strong>5 estrellas de satisfacción</strong>. ¡Sus sonrisas (y ronroneos) lo dicen todo!</p> 
-            <div class="modal-image-grid"> 
-                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+1" alt="Gatito feliz 1 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
-                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+2" alt="Gatito feliz 2 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
-                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+3" alt="Gatito feliz 3 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
-                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+4" alt="Gatito feliz 4 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
-            </div> 
-        </div> 
+    <div id="sobreNosotrosModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-spa"></i>Sobre Nosotros</h2>
+            <p class="mb-5 text-base md:text-lg leading-relaxed">En <strong>SPAYOGA</strong>, entendemos que los gatos no son solo mascotas, son miembros venerados de la familia que merecen el más alto nivel de cuidado y afecto. Nacimos de una profunda pasión por el bienestar felino y el anhelo de crear un santuario exclusivo donde los gatos puedan experimentar una relajación trascendental y un cuidado especializado que nutra su cuerpo y espíritu.</p>
+            <p class="mb-5 text-base md:text-lg leading-relaxed">Nuestra filosofía se arraiga en la serenidad, el respeto por la naturaleza sensible de cada gato y la armonía del entorno. Ofrecemos una experiencia de spa holística, meticulosamente diseñada en fases progresivas, que combina técnicas de masaje terapéutico suave, aromaterapia con esencias seguras y placenteras para felinos, musicoterapia con frecuencias relajantes y un ambiente etéreo que invita al descanso profundo y al ronroneo gozoso.</p>
+            <p class="text-base md:text-lg leading-relaxed">Creemos firmemente que un gato relajado es un gato feliz y saludable. Nuestra misión es proporcionar ese oasis de calma y rejuvenecimiento para tu compañero bigotudo, elevando su calidad de vida. ¡Ven y descubre por qué SPAYOGA es el paraíso terrenal preferido por los gatos más exigentes!</p>
+        </div>
     </div>
-    <div id="informacionModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-info-circle" style="color: #8D6E63; margin-right: 10px;"></i>Solicitar Información</h2> <p class="mb-6 text-base md:text-lg">¿Interesado en regalarle a tu gato una experiencia SPAYOGA? Completa el formulario y nos pondremos en contacto contigo.</p> <form id="contactForm"> <input type="text" name="nombre" placeholder="Nombre y Apellido" class="form-input" required> <input type="email" name="email" placeholder="Correo Electrónico" class="form-input" required> <input type="tel" name="telefono" placeholder="Número de Teléfono" class="form-input" required> <input type="text" name="localidad" placeholder="Localidad" class="form-input" required> <button type="submit" class="submit-button">Enviar Formulario</button> </form> <div id="formMessage" class="mt-4 text-center"></div> </div> </div>
-    <div id="felinosModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-cat" style="color: #8D6E63; margin-right: 10px;"></i>Universo Felino</h2> <p class="mb-4 text-base md:text-lg">[Contenido de la sección Felinos en desarrollo. ¡Pronto más curiosidades sobre nuestros amigos bigotudos!]</p> </div> </div>
-    <div id="termsModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-file-contract" style="color: #8D6E63; margin-right: 10px;"></i>Términos y Condiciones</h2> <p class="mb-4 text-base md:text-lg">Bienvenido a SPAYOGA... [Términos completos en desarrollo]</p> </div> </div>
+
+    <div id="ubicacionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-map-marked-alt"></i>Nuestra Ubicación</h2>
+            <p class="mb-5 text-base md:text-lg leading-relaxed">Encuéntranos en un rincón sereno de la ciudad, un oasis de paz diseñado para el máximo confort de tu felino. Nuestra dirección es: <strong>Avenida Siempreviva 742, Springfield</strong>. ¡Te esperamos para brindarle a tu gato una experiencia inolvidable!</p>
+            <div class="map-container mb-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086439319529!2d-122.41941548468139!3d37.77492927975909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c1c0e8c95%3A0xfa7a7771576f047c!2sCity%20Hall%2C%20San%20Francisco%2C%20CA%2094102%2C%20USA!5e0!3m2!1sen!2sar!4v1620000000000!5m2!1sen!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ubicación de SPAYOGA"></iframe>
+            </div>
+            <div class="text-center">
+                <a href="https://maps.google.com/?q=Avenida+Siempreviva+742,Springfield" target="_blank" class="inline-block text-white py-3 px-8 rounded-lg hover:bg-opacity-80 transition-colors duration-300 text-lg font-semibold shadow-md" style="background-color: #A0522D;">
+                    <i class="fas fa-directions mr-2"></i>Abrir en Google Maps
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-phone-volume"></i>Contáctanos</h2>
+            <div class="space-y-5">
+                <p class="contact-item text-lg"><i class="fas fa-mobile-alt fa-fw"></i><strong>Celular / WhatsApp:</strong> <a href="tel:+543765233400" class="hover:underline text-brown-700">+54 9 3765 233400</a></p>
+                <p class="contact-item text-lg"><i class="fas fa-envelope-open-text fa-fw"></i><strong>Correo Electrónico:</strong> <a href="mailto:spayogaemp@gmail.com" class="hover:underline text-brown-700">spayogaemp@gmail.com</a></p>
+                <p class="contact-item text-lg"><i class="fab fa-instagram fa-fw"></i><strong>Instagram:</strong> <a href="https://instagram.com/SpaYogaok" target="_blank" class="hover:underline text-brown-700">@SpaYogaok</a></p>
+                <p class="contact-item text-lg"><i class="fas fa-clock fa-fw"></i><strong>Horario de Atención:</strong> Lunes a Sábados de 9:00 a 19:00 hs.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="experienciasModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-grin-stars"></i>Experiencias SPAYOGA</h2>
+            <p class="mb-6 text-base md:text-lg leading-relaxed text-center">Nuestros clientes felinos (¡y sus humanos!) nos otorgan consistentemente <strong>5 estrellas de pura satisfacción</strong>. Sus sonrisas, ronroneos y miradas de felicidad ¡lo dicen todo! Aquí algunas postales de nuestros pequeños VIPs disfrutando de su momento SPAYOGA:</p>
+            <div class="modal-image-grid">
+                <img src="https://placehold.co/250x250/E7BC91/4A3B32?text=Zen+Cat+1" alt="Gatito Zen 1 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/250x250/E7BC91/4A3B32?text=Imagen+no+disponible';">
+                <img src="https://placehold.co/250x250/D4A276/FFFBF5?text=Relaxed+Feline+2" alt="Felino Relajado 2 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/250x250/D4A276/FFFBF5?text=Imagen+no+disponible';">
+                <img src="https://placehold.co/250x250/C8936A/FFFFFF?text=Happy+Kitty+3" alt="Minino Feliz 3 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/250x250/C8936A/FFFFFF?text=Imagen+no+disponible';">
+                <img src="https://placehold.co/250x250/A0522D/FDF6EC?text=Pampered+Paws+4" alt="Patitas Consentidas 4 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/250x250/A0522D/FDF6EC?text=Imagen+no+disponible';">
+            </div>
+            <p class="mt-6 text-center text-italic text-gray-600">"¡Nunca vi a Mishi tan relajado! Volveremos seguro." - Dueño de Mishi.</p>
+        </div>
+    </div>
+
+    <div id="informacionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-file-alt"></i>Solicitar Información Detallada</h2>
+            <p class="mb-6 text-base md:text-lg leading-relaxed">¿Interesado en regalarle a tu gato una experiencia SPAYOGA única o deseas conocer más sobre nuestros paquetes y servicios personalizados? Completa el siguiente formulario y nuestro equipo de bienestar felino se pondrá en contacto contigo a la brevedad.</p>
+            <form id="contactForm">
+                <input type="text" name="nombre" placeholder="Nombre y Apellido del Humano" class="form-input" required>
+                <input type="text" name="nombre_gato" placeholder="Nombre de tu Gato" class="form-input" required>
+                <input type="email" name="email" placeholder="Correo Electrónico de Contacto" class="form-input" required>
+                <input type="tel" name="telefono" placeholder="Número de Teléfono (con código de área)" class="form-input" required>
+                <input type="text" name="localidad" placeholder="Tu Localidad" class="form-input" required>
+                <textarea name="consulta" placeholder="Cuéntanos un poco sobre tu gato y qué te gustaría saber..." class="form-input min-h-[100px]" rows="4"></textarea>
+                <button type="submit" class="submit-button w-full">Enviar Formulario de Consulta</button>
+            </form>
+            <div id="formMessage" class="mt-5 text-center font-semibold"></div>
+        </div>
+    </div>
+
+    <div id="felinosModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-cat"></i>Universo Felino SPAYOGA</h2>
+            <p class="mb-5 text-base md:text-lg leading-relaxed">En SPAYOGA, cada felino es una estrella. Celebramos sus personalidades únicas, sus misterios y su infinita capacidad de dar y recibir amor. Esta sección está dedicada a explorar el fascinante mundo de los gatos: desde consejos de cuidado y curiosidades sobre su comportamiento, hasta historias inspiradoras de nuestros clientes peludos.</p>
+            <p class="mb-5 text-base md:text-lg leading-relaxed"><strong>Próximamente:</strong> Artículos sobre nutrición felina, la importancia del juego, cómo entender el lenguaje corporal de tu gato, y mucho más. ¡Mantente atento a las novedades de nuestro blog felino!</p>
+            <div class="text-center">
+                <img src="https://placehold.co/400x250/E7BC91/4A3B32?text=Curiosidades+Felinas" alt="Banner de curiosidades felinas" class="rounded-lg shadow-md mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/400x250/E7BC91/4A3B32?text=Próximamente';">
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2><i class="fas fa-gavel"></i>Términos y Condiciones</h2>
+            <p class="mb-4 text-base md:text-lg">Bienvenido a SPAYOGA. Al utilizar nuestros servicios, aceptas los siguientes términos y condiciones. Por favor, léelos atentamente.</p>
+            <h3 class="text-xl font-semibold mt-4 mb-2 text-gray-700">1. Servicios Ofrecidos</h3>
+            <p class="mb-3 text-sm md:text-base">SPAYOGA ofrece servicios de spa y bienestar para gatos, incluyendo masajes, aromaterapia, musicoterapia y otros tratamientos relajantes. Todos los servicios se realizan con productos seguros y específicos para felinos.</p>
+            <h3 class="text-xl font-semibold mt-4 mb-2 text-gray-700">2. Reservas y Cancelaciones</h3>
+            <p class="mb-3 text-sm md:text-base">Se requiere reserva previa para todos los servicios. Las cancelaciones deben realizarse con al menos 24 horas de antelación. Cancelaciones tardías o no presentaciones pueden estar sujetas a cargos.</p>
+            <h3 class="text-xl font-semibold mt-4 mb-2 text-gray-700">3. Salud y Seguridad del Gato</h3>
+            <p class="mb-3 text-sm md:text-base">Es responsabilidad del dueño informar sobre cualquier condición médica preexistente, alergias o sensibilidades de su gato. SPAYOGA se reserva el derecho de rechazar el servicio a cualquier gato que presente signos de enfermedad contagiosa o agresividad que pueda poner en riesgo al personal o a otros animales.</p>
+            <p class="mt-6 text-xs text-gray-500">[Versión resumida. Los términos completos y actualizados están disponibles en nuestras instalaciones y se proporcionarán al momento de la reserva.]</p>
+        </div>
+    </div>
 
     <div id="ratingModal" class="modal">
         <div class="modal-content">
             <span class="close-button">×</span>
-            <h2><i class="fas fa-award" style="color: #8D6E63; margin-right: 10px;"></i>Califica tu Experiencia</h2>
+            <h2><i class="fas fa-medal"></i>Valora tu Experiencia SPAYOGA</h2>
             <div id="ratingStarsContent">
-                <p class="text-center mb-2 text-lg">Por favor, selecciona tu calificación:</p>
+                <p class="text-center mb-3 text-lg">Tu opinión es muy importante. Por favor, selecciona tu calificación:</p>
                 <div class="stars-container" id="starsContainer">
-                    <i class="fas fa-star star" data-value="1"></i>
-                    <i class="fas fa-star star" data-value="2"></i>
-                    <i class="fas fa-star star" data-value="3"></i>
-                    <i class="fas fa-star star" data-value="4"></i>
-                    <i class="fas fa-star star" data-value="5"></i>
+                    <i class="fas fa-star star" data-value="1" title="Muy insatisfecho/a"></i>
+                    <i class="fas fa-star star" data-value="2" title="Insatisfecho/a"></i>
+                    <i class="fas fa-star star" data-value="3" title="Neutral"></i>
+                    <i class="fas fa-star star" data-value="4" title="Satisfecho/a"></i>
+                    <i class="fas fa-star star" data-value="5" title="Muy satisfecho/a"></i>
                 </div>
-                <div id="ratingDescription"></div> 
+                <div id="ratingDescription" class="mt-3"></div>
             </div>
             <div id="ratingThankYouMessage" style="display: none;">
             </div>
-            <div id="commentFormContainer" style="display: none;">
-                <textarea id="ratingComment" placeholder="Cuéntanos más sobre tu experiencia para ayudarnos a mejorar..."></textarea>
-                <button id="submitRatingComment">Enviar Comentario</button>
-                <div id="commentSubmitMessage" style="display:none;">¡Comentario enviado, gracias!</div>
+            <div id="commentFormContainer" style="display: none;" class="mt-5">
+                <textarea id="ratingComment" placeholder="Cuéntanos más sobre tu experiencia para ayudarnos a mejorar y seguir mimando a nuestros clientes felinos..." class="form-input min-h-[100px]" rows="4"></textarea>
+                <button id="submitRatingComment" class="submit-button w-full mt-2">Enviar Comentario Adicional</button>
+                <div id="commentSubmitMessage" style="display:none;" class="text-center text-green-600 mt-3 font-semibold">¡Comentario enviado, muchas gracias por tu tiempo!</div>
             </div>
         </div>
     </div>
@@ -915,93 +1081,101 @@
     <div id="adopcionesModal" class="modal">
         <div class="modal-content">
             <span class="close-button">×</span>
-            <h2><i class="fas fa-paw" style="color: #8D6E63; margin-right: 10px;"></i> Adopta un Amigo Felino</h2>
-            <p class="text-center mb-8 text-lg">En SPAYOGA, también creemos en dar segundas oportunidades. Conoce a algunos de nuestros adorables felinos que buscan un hogar lleno de amor y ronroneos.</p>
+            <h2><i class="fas fa-home"></i> Adopta un Corazón Felino</h2>
+            <p class="text-center mb-8 text-lg leading-relaxed">En SPAYOGA, además de mimar, creemos en el poder transformador de las segundas oportunidades. Conoce a algunos de nuestros adorables felinos rescatados que están buscando un hogar lleno de amor, caricias y ronroneos eternos. Adoptar es un acto de amor que cambia vidas, ¡la tuya y la de un ser maravilloso!</p>
             <div class="adoption-grid">
                 <div class="adoption-card">
-                    <img src="imagenes/Adopcion1.jpg" alt="Gato en adopción Mochi" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Mochi';">
+                    <img src="imagenes/Adopcion1.jpg" alt="Gato en adopción Mochi" onerror="this.onerror=null; this.src='https://placehold.co/350x220/F3D5B5/5D4037?text=Mochi';">
                     <div class="adoption-card-content">
                         <h3>Mochi</h3>
-                        <p class="description">Un explorador juguetón y mimoso, siempre listo para una nueva aventura o una buena siesta al sol.</p>
+                        <p class="description">Un explorador intrépido y mimoso de corazón, siempre listo para una nueva aventura o una larga siesta al sol. Le encantan los juguetes con plumas.</p>
                         <div class="details">
-                            <p><strong>Sexo:</strong> Macho</p>
-                            <p><strong>Edad Estimada:</strong> 1 año</p>
-                            <p><strong>Carácter:</strong> Curioso y afectuoso</p>
+                            <p><i class="fas fa-venus-mars mr-2 text-gray-500"></i><strong>Sexo:</strong> Macho</p>
+                            <p><i class="fas fa-birthday-cake mr-2 text-gray-500"></i><strong>Edad Estimada:</strong> 1 año</p>
+                            <p><i class="fas fa-paw mr-2 text-gray-500"></i><strong>Carácter:</strong> Curioso, juguetón y muy afectuoso</p>
                         </div>
-                        <button class="more-info-btn">Conocer Más</button>
+                        <button class="more-info-btn"><i class="fas fa-info-circle mr-2"></i>Conocer Más sobre Mochi</button>
                     </div>
                 </div>
                 <div class="adoption-card">
-                    <img src="imagenes/Adopcion2.jpg" alt="Gato en adopción Leo" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Leo';">
+                    <img src="imagenes/Adopcion2.jpg" alt="Gato en adopción Leo" onerror="this.onerror=null; this.src='https://placehold.co/350x220/D4A276/4A3B32?text=Leo';">
                     <div class="adoption-card-content">
                         <h3>Leo</h3>
-                        <p class="description">Un caballero tranquilo y observador, amante de las caricias suaves y las tardes de contemplación.</p>
+                        <p class="description">Un caballero tranquilo, observador y con una mirada que derrite. Amante de las caricias suaves y las tardes de contemplación desde la ventana.</p>
                         <div class="details">
-                            <p><strong>Sexo:</strong> Macho</p>
-                            <p><strong>Edad Estimada:</strong> 3 años</p>
-                            <p><strong>Carácter:</strong> Sereno y gentil</p>
+                            <p><i class="fas fa-venus-mars mr-2 text-gray-500"></i><strong>Sexo:</strong> Macho</p>
+                            <p><i class="fas fa-birthday-cake mr-2 text-gray-500"></i><strong>Edad Estimada:</strong> 3 años</p>
+                            <p><i class="fas fa-paw mr-2 text-gray-500"></i><strong>Carácter:</strong> Sereno, gentil y un poco tímido al principio</p>
                         </div>
-                        <button class="more-info-btn">Conocer Más</button>
+                        <button class="more-info-btn"><i class="fas fa-info-circle mr-2"></i>Conocer Más sobre Leo</button>
                     </div>
                 </div>
                 <div class="adoption-card">
-                    <img src="imagenes/Adopcion3.jpg" alt="Gato en adopción Cleo" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Cleo';">
+                    <img src="imagenes/Adopcion3.jpg" alt="Gato en adopción Cleo" onerror="this.onerror=null; this.src='https://placehold.co/350x220/C8936A/FFFBF5?text=Cleo';">
                     <div class="adoption-card-content">
                         <h3>Cleo</h3>
-                        <p class="description">Una dulce princesa que adora los mimos y busca un regazo cálido donde acurrucarse.</p>
+                        <p class="description">Una dulce princesa que adora los mimos y busca un regazo cálido donde acurrucarse y ronronear durante horas. Le gusta conversar con maullidos suaves.</p>
                         <div class="details">
-                            <p><strong>Sexo:</strong> Hembra</p>
-                            <p><strong>Edad Estimada:</strong> 2 años</p>
-                            <p><strong>Carácter:</strong> Tierna y hogareña</p>
+                            <p><i class="fas fa-venus-mars mr-2 text-gray-500"></i><strong>Sexo:</strong> Hembra</p>
+                            <p><i class="fas fa-birthday-cake mr-2 text-gray-500"></i><strong>Edad Estimada:</strong> 2 años</p>
+                            <p><i class="fas fa-paw mr-2 text-gray-500"></i><strong>Carácter:</strong> Tierna, hogareña y muy cariñosa</p>
                         </div>
-                        <button class="more-info-btn">Conocer Más</button>
+                        <button class="more-info-btn"><i class="fas fa-info-circle mr-2"></i>Conocer Más sobre Cleo</button>
                     </div>
                 </div>
                 <div class="adoption-card">
-                    <img src="imagenes/Adopcion4.jpg" alt="Gato en adopción Simba" onerror="this.onerror=null; this.src='https://placehold.co/300x200/F3D5B5/5D4037?text=Simba';">
+                    <img src="imagenes/Adopcion4.jpg" alt="Gato en adopción Simba" onerror="this.onerror=null; this.src='https://placehold.co/350x220/A0522D/FFFFFF?text=Simba';">
                     <div class="adoption-card-content">
                         <h3>Simba</h3>
-                        <p class="description">Un espíritu aventurero con un corazón de oro, siempre buscando un compañero de juegos.</p>
+                        <p class="description">Un espíritu aventurero con un corazón de oro y una energía contagiosa. Siempre buscando un compañero de juegos y travesuras.</p>
                         <div class="details">
-                            <p><strong>Sexo:</strong> Macho</p>
-                            <p><strong>Edad Estimada:</strong> 1.5 años</p>
-                            <p><strong>Carácter:</strong> Enérgico y leal</p>
+                            <p><i class="fas fa-venus-mars mr-2 text-gray-500"></i><strong>Sexo:</strong> Macho</p>
+                            <p><i class="fas fa-birthday-cake mr-2 text-gray-500"></i><strong>Edad Estimada:</strong> 1.5 años</p>
+                            <p><i class="fas fa-paw mr-2 text-gray-500"></i><strong>Carácter:</strong> Enérgico, leal y muy sociable</p>
                         </div>
-                        <button class="more-info-btn">Conocer Más</button>
+                        <button class="more-info-btn"><i class="fas fa-info-circle mr-2"></i>Conocer Más sobre Simba</button>
                     </div>
                 </div>
             </div>
+             <p class="text-center mt-8 text-sm text-gray-600">Para más información sobre el proceso de adopción, por favor <a href="#" data-modal="contactoModal" class="text-blue-600 hover:underline font-semibold contact-link-from-adoption">contáctanos</a>.</p>
         </div>
     </div>
 
     <script>
-        let activeAnimatedOriginalButton = null; 
+        let activeAnimatedOriginalButton = null;
         let originalButtonProps = null;
         let buttonClone = null;
 
-        const functionalModals = ['sobreNosotrosModal', 'ubicacionModal', 'contactoModal', 'experienciasModal', 'informacionModal', 'felinosModal', 'termsModal', 'adopcionesModal', 'ratingModal']; 
+        const functionalModals = ['sobreNosotrosModal', 'ubicacionModal', 'contactoModal', 'experienciasModal', 'informacionModal', 'felinosModal', 'termsModal', 'adopcionesModal', 'ratingModal'];
 
         function openAnimatedModal(modalId, buttonElement) {
             const isNavButton = buttonElement.classList.contains('nav-button');
             const targetModal = document.getElementById(modalId);
-            
-            if (!targetModal) return; 
+
+            if (!targetModal) {
+                console.error("Modal not found:", modalId);
+                return;
+            }
 
             if (buttonClone) {
                 buttonClone.remove();
                 buttonClone = null;
             }
-            if (activeAnimatedOriginalButton && originalButtonProps) { 
+            if (activeAnimatedOriginalButton && originalButtonProps) {
                 activeAnimatedOriginalButton.style.opacity = originalButtonProps.originalOpacity || '1';
                 activeAnimatedOriginalButton.style.pointerEvents = originalButtonProps.originalPointerEvents || 'auto';
             }
-            activeAnimatedOriginalButton = null; // Resetear siempre
-            originalButtonProps = null; // Resetear siempre
-            
-            const shouldAnimateButton = isNavButton && window.innerWidth >= 768;
+            activeAnimatedOriginalButton = null;
+            originalButtonProps = null;
 
+            const shouldAnimateButton = isNavButton && window.innerWidth >= 768; 
             const targetModalContent = targetModal.querySelector('.modal-content');
 
+            if (!targetModalContent) {
+                console.error("Modal content not found for:", modalId);
+                return;
+            }
+            
             originalButtonProps = {
                 element: buttonElement,
                 rect: buttonElement.getBoundingClientRect(),
@@ -1010,49 +1184,56 @@
                 originalOpacity: buttonElement.style.opacity || '',
                 originalPointerEvents: buttonElement.style.pointerEvents || ''
             };
-            
-            if (shouldAnimateButton) { 
+
+            if (shouldAnimateButton) {
                 activeAnimatedOriginalButton = buttonElement; 
                 buttonElement.style.opacity = '0'; 
                 buttonElement.style.pointerEvents = 'none'; 
 
                 buttonClone = document.createElement('div');
                 buttonClone.innerHTML = originalButtonProps.text;
-                buttonClone.classList.add('animated-button-clone');
+                buttonClone.className = originalButtonProps.element.className + ' animated-button-clone'; 
                 
                 buttonClone.style.top = `${originalButtonProps.rect.top}px`;
                 buttonClone.style.left = `${originalButtonProps.rect.left}px`;
                 buttonClone.style.width = `${originalButtonProps.rect.width}px`;
                 buttonClone.style.height = `${originalButtonProps.rect.height}px`;
+                if (!buttonClone.classList.contains('nav-button')) {
+                    buttonClone.classList.add('nav-button');
+                }
+                buttonClone.style.position = 'fixed'; 
+                buttonClone.style.zIndex = '1060';
+                buttonClone.style.margin = '0'; 
+
                 document.body.appendChild(buttonClone);
 
-                requestAnimationFrame(() => { 
-                    buttonClone.style.top = '8vh'; 
+                requestAnimationFrame(() => {
+                    buttonClone.style.top = '6vh'; 
                     buttonClone.style.left = '50%';
-                    buttonClone.style.transform = 'translateX(-50%) scale(1.1)';
-                    buttonClone.style.opacity = '1';
+                    buttonClone.style.transform = 'translateX(-50%) scale(1.05)'; 
+                    buttonClone.style.opacity = '1'; 
                 });
 
                 buttonClone.addEventListener('transitionend', function onCloneAtTop(event) {
                     if (event.target === buttonClone && (event.propertyName === 'transform' || event.propertyName === 'top' || event.propertyName === 'left')) {
                         buttonClone.removeEventListener('transitionend', onCloneAtTop);
                         buttonClone.style.transform = 'translateX(-50%) scale(1)'; 
-                        
-                        displayModalContent(targetModal, targetModalContent);
-                        
+
+                        displayModalContent(targetModal, targetModalContent); 
+
                         setTimeout(() => {
                             if (buttonClone) buttonClone.style.opacity = '0';
-                        }, 400); 
+                        }, 300); 
                     }
                 });
             } else { 
-                 displayModalContent(targetModal, targetModalContent);
+                displayModalContent(targetModal, targetModalContent);
             }
 
-            if (modalId === 'ratingModal') { 
+            if (modalId === 'ratingModal') {
                 resetRatingModal();
             }
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden'; 
         }
 
         function displayModalContent(modalElement, modalContentElement) {
@@ -1065,22 +1246,23 @@
             });
         }
 
-
         function closeAnimatedModal(modalElement) {
+            if (!modalElement) return;
             const modalContent = modalElement.querySelector('.modal-content');
-            
+            if (!modalContent) return;
+
             modalContent.classList.remove('open'); 
 
             modalContent.addEventListener('transitionend', function onPersianaClosed(event) {
-                 if (event.target !== modalContent || (event.propertyName !== 'max-height' && event.propertyName !== 'opacity')) return;
+                if (event.target !== modalContent || (event.propertyName !== 'max-height' && event.propertyName !== 'opacity' && event.propertyName !== 'transform')) return;
                 modalContent.removeEventListener('transitionend', onPersianaClosed);
 
                 modalElement.classList.remove('active'); 
-                
+
                 modalElement.addEventListener('transitionend', function onBackdropFaded(event) {
                     if (event.target !== modalElement || event.propertyName !== 'opacity') return;
                     modalElement.removeEventListener('transitionend', onBackdropFaded);
-                    modalElement.style.display = 'none';
+                    modalElement.style.display = 'none'; 
 
                     const btnToRestore = activeAnimatedOriginalButton || (originalButtonProps ? originalButtonProps.element : null);
 
@@ -1089,52 +1271,53 @@
                         buttonClone.style.top = `${originalButtonProps.rect.top}px`;
                         buttonClone.style.left = `${originalButtonProps.rect.left}px`;
                         buttonClone.style.transform = 'translateX(0) scale(1)';
+                        buttonClone.style.width = `${originalButtonProps.rect.width}px`;
+                        buttonClone.style.height = `${originalButtonProps.rect.height}px`;
+
 
                         buttonClone.addEventListener('transitionend', function onCloneReturned(event) {
-                            if (event.target === buttonClone && (event.propertyName === 'transform' || event.propertyName === 'top' || event.propertyName === 'left')) {
+                             if (event.target === buttonClone && (event.propertyName === 'transform' || event.propertyName === 'top' || event.propertyName === 'left')) {
                                 buttonClone.removeEventListener('transitionend', onCloneReturned);
                                 
-                                if (btnToRestore) {
-                                    btnToRestore.style.opacity = originalButtonProps.originalOpacity || '1'; 
-                                    btnToRestore.style.pointerEvents = originalButtonProps.originalPointerEvents ||'auto'; 
+                                if (btnToRestore) { 
+                                    btnToRestore.style.opacity = originalButtonProps.originalOpacity || '1';
+                                    btnToRestore.style.pointerEvents = originalButtonProps.originalPointerEvents || 'auto';
                                 }
                                 
-                                if (buttonClone) buttonClone.remove();
+                                if (buttonClone) buttonClone.remove(); 
                                 buttonClone = null;
                                 activeAnimatedOriginalButton = null; 
-                                originalButtonProps = null; 
+                                originalButtonProps = null;
                             }
                         });
-                    } else {
-                        if (btnToRestore) {
-                             btnToRestore.style.opacity = originalButtonProps ? (originalButtonProps.originalOpacity || '1') : '1'; 
-                             btnToRestore.style.pointerEvents = originalButtonProps ? (originalButtonProps.originalPointerEvents || 'auto') : 'auto'; 
+                    } else { 
+                        if (btnToRestore) { 
+                             btnToRestore.style.opacity = originalButtonProps ? (originalButtonProps.originalOpacity || '1') : '1';
+                             btnToRestore.style.pointerEvents = originalButtonProps ? (originalButtonProps.originalPointerEvents || 'auto') : 'auto';
                         }
                         if (buttonClone) { 
                            buttonClone.remove();
                            buttonClone = null;
                         }
                         activeAnimatedOriginalButton = null; 
-                        originalButtonProps = null; 
+                        originalButtonProps = null;
                     }
-
-                    if (!Array.from(document.querySelectorAll('.modal.active')).length) {
+                    if (!document.querySelector('.modal.active')) {
                         document.body.style.overflow = 'auto';
                     }
                 });
             });
         }
 
-        document.querySelectorAll('.nav-button, .rating-button, #termsLink, #adoptionButton').forEach(button => {
+        document.querySelectorAll('[data-modal]').forEach(button => {
             button.addEventListener('click', (e) => {
                 const modalId = e.currentTarget.getAttribute('data-modal');
-                if (modalId) { 
+                if (modalId) {
                    openAnimatedModal(modalId, e.currentTarget);
                 }
             });
         });
         
-
         document.querySelectorAll('.modal .close-button').forEach(button => {
             button.addEventListener('click', (e) => {
                 const modalToClose = e.currentTarget.closest('.modal');
@@ -1150,6 +1333,14 @@
             });
         });
 
+        document.addEventListener('keydown', (event) => {
+            if (event.key === "Escape") {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) {
+                    closeAnimatedModal(activeModal);
+                }
+            }
+        });
 
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
@@ -1157,42 +1348,49 @@
         const formMessage = document.getElementById('formMessage');
         if (contactForm) {
             contactForm.addEventListener('submit', function(event) {
-                event.preventDefault(); 
-                formMessage.textContent = '¡Gracias! Tu formulario ha sido enviado. Nos pondremos en contacto pronto.';
-                formMessage.className = 'mt-4 text-center text-green-600 text-lg'; 
-                contactForm.reset(); 
+                event.preventDefault();
+                const formData = new FormData(contactForm);
+                const name = formData.get('nombre');
+                formMessage.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-2"></i>¡Gracias, ${name}! Tu formulario ha sido enviado. Nos pondremos en contacto pronto.`;
+                formMessage.className = 'mt-5 text-center font-semibold text-green-700';
+                contactForm.reset();
                 setTimeout(() => {
-                    formMessage.textContent = ''; 
-                }, 3000); 
+                    formMessage.textContent = '';
+                    formMessage.className = 'mt-5 text-center font-semibold';
+                }, 5000); 
             });
         }
 
         const starsContainer = document.getElementById('starsContainer');
-        const stars = starsContainer ? starsContainer.querySelectorAll('.star') : [];
+        const stars = starsContainer ? Array.from(starsContainer.querySelectorAll('.star')) : [];
         const ratingDescription = document.getElementById('ratingDescription');
         const ratingStarsContent = document.getElementById('ratingStarsContent');
         const ratingThankYouMessage = document.getElementById('ratingThankYouMessage');
-        const commentFormContainer = document.getElementById('commentFormContainer'); 
+        const commentFormContainer = document.getElementById('commentFormContainer');
         const submitRatingCommentButton = document.getElementById('submitRatingComment');
         const commentSubmitMessage = document.getElementById('commentSubmitMessage');
+        const ratingCommentTextarea = document.getElementById('ratingComment');
 
         const ratingTexts = {
-            0: "", 1: "Muy insatisfecho/a", 2: "Insatisfecho/a", 3: "Neutral", 4: "Satisfecho/a", 5: "Muy satisfecho/a"
+            0: "Selecciona una calificación...", 1: "Muy insatisfecho/a", 2: "Insatisfecho/a", 3: "Neutral, podría mejorar", 4: "Satisfecho/a, ¡buen trabajo!", 5: "¡Excelente, totalmente encantado/a!"
         };
-        let ratingSubmitted = false; 
-        let currentRating = 0; 
+        let ratingSubmitted = false;
+        let currentRating = 0;
 
         function highlightStars(rating) {
-            stars.forEach(star => {
-                star.classList.toggle('hover', star.dataset.value <= rating);
+            stars.forEach((star, index) => {
+                star.classList.toggle('hover', index < rating);
                 if (!ratingSubmitted) star.classList.remove('selected');
             });
-            if (ratingDescription && !ratingSubmitted) ratingDescription.textContent = ratingTexts[rating] || "";
+            if (ratingDescription && !ratingSubmitted) {
+                 ratingDescription.textContent = ratingTexts[rating] || ratingTexts[0];
+                 ratingDescription.style.opacity = rating > 0 ? '1' : '0.7';
+            }
         }
         
         function setRatingDisplay(rating) {
-            stars.forEach(star => {
-                star.classList.toggle('selected', star.dataset.value <= rating);
+            stars.forEach((star, index) => {
+                star.classList.toggle('selected', index < rating);
                 star.classList.remove('hover');
             });
             if (ratingDescription) ratingDescription.textContent = ratingTexts[rating] || "";
@@ -1203,82 +1401,105 @@
             if (ratingStarsContent) ratingStarsContent.style.display = 'block';
             if (ratingThankYouMessage) { ratingThankYouMessage.style.display = 'none'; ratingThankYouMessage.innerHTML = ''; }
             if (commentFormContainer) commentFormContainer.style.display = 'none';
-            if (document.getElementById('ratingComment')) document.getElementById('ratingComment').value = '';
+            if (ratingCommentTextarea) ratingCommentTextarea.value = '';
             if (commentSubmitMessage) commentSubmitMessage.style.display = 'none';
-            if (ratingDescription) ratingDescription.textContent = "";
-            setRatingDisplay(0); 
+            if (ratingDescription) {
+                ratingDescription.textContent = ratingTexts[0];
+                ratingDescription.style.opacity = '0.7';
+            }
+            setRatingDisplay(0);
         }
         
         if (starsContainer) {
             starsContainer.addEventListener('mouseover', (event) => {
                 if (ratingSubmitted || !event.target.classList.contains('star')) return;
-                highlightStars(event.target.dataset.value);
+                const ratingValue = parseInt(event.target.dataset.value);
+                highlightStars(ratingValue);
             });
             starsContainer.addEventListener('mouseout', () => {
                 if (ratingSubmitted) return;
                 highlightStars(currentRating); 
-                if (ratingDescription) ratingDescription.textContent = ratingTexts[currentRating] || "";
+                 if (ratingDescription) {
+                    ratingDescription.textContent = ratingTexts[currentRating] || ratingTexts[0];
+                    ratingDescription.style.opacity = currentRating > 0 ? '1' : '0.7';
+                }
             });
         }
 
         stars.forEach(star => {
             star.addEventListener('click', (event) => {
                 if (ratingSubmitted) return;
-                currentRating = parseInt(event.target.dataset.value); 
-                ratingSubmitted = true; 
+                currentRating = parseInt(event.target.dataset.value);
+                ratingSubmitted = true;
                 setRatingDisplay(currentRating);
                 
-                if (ratingStarsContent) ratingStarsContent.style.display = 'none'; 
+                if (ratingStarsContent) ratingStarsContent.style.display = 'none';
                 
                 if (ratingThankYouMessage) {
-                    if (currentRating <= 3) { 
-                        ratingThankYouMessage.innerHTML = `Lamentamos tu experiencia en SPAYOGA. <i class="far fa-sad-tear" style="color: #4a5568;"></i>`;
-                        if (commentFormContainer) commentFormContainer.style.display = 'block'; 
+                    let thankYouText = `¡Gracias por calificarnos con ${currentRating} estrella${currentRating > 1 ? 's' : ''}! <i class="fas fa-heart"></i>`;
+                    if (currentRating <= 3) {
+                        thankYouText = `Lamentamos que tu experiencia no haya sido la mejor (${currentRating} estrella${currentRating > 1 ? 's' : ''}). <i class="far fa-sad-tear"></i><br>Agradeceríamos tus comentarios para mejorar.`;
+                        if (commentFormContainer) commentFormContainer.style.display = 'block';
                     } else {
-                        ratingThankYouMessage.innerHTML = `¡Gracias por calificarnos con ${currentRating} estrella${currentRating > 1 ? 's' : ''}! <i class="fas fa-heart" style="color: #C8ADA0;"></i>`;
-                        if (commentFormContainer) commentFormContainer.style.display = 'none'; 
+                         if (commentFormContainer) commentFormContainer.style.display = 'block'; 
+                         thankYouText = `¡Gracias por tu calificación de ${currentRating} estrella${currentRating > 1 ? 's' : ''}! <i class="fas fa-paw" style="color: #C8ADA0;"></i> <br>¡Nos alegra que hayas disfrutado! Si deseas, déjanos un comentario.`;
                     }
+                    ratingThankYouMessage.innerHTML = thankYouText;
                     ratingThankYouMessage.style.display = 'block';
                 }
             });
         });
 
-        if(submitRatingCommentButton) {
+        if(submitRatingCommentButton && ratingCommentTextarea) {
             submitRatingCommentButton.addEventListener('click', () => {
+                console.log("Rating:", currentRating, "Comment:", ratingCommentTextarea.value);
+                
                 if (commentFormContainer) commentFormContainer.style.display = 'none';
                 if (commentSubmitMessage) {
                     commentSubmitMessage.style.display = 'block';
-                     setTimeout(() => { 
+                     setTimeout(() => {
                         commentSubmitMessage.style.display = 'none';
                     }, 3000);
                 }
             });
         }
 
-
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const answer = button.nextElementSibling;
-                const pawIcon = button.querySelector('.faq-paw-icon');
                 const isActive = button.classList.contains('active');
                 
-                button.classList.toggle('active', !isActive);
+                if (!isActive) {
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        if (ans !== answer) {
+                            ans.style.maxHeight = '0px';
+                            ans.previousElementSibling.classList.remove('active');
+                            const prevPaw = ans.previousElementSibling.querySelector('.faq-paw-icon');
+                            if(prevPaw) prevPaw.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                }
+
+                button.classList.toggle('active');
+                const pawIcon = button.querySelector('.faq-paw-icon');
                 
-                if (answer.style.maxHeight && answer.style.maxHeight !== '0px') { 
-                    answer.style.maxHeight = '0px';
-                    if(pawIcon) pawIcon.style.transform = 'rotate(0deg)';
-                } else { 
+                if (button.classList.contains('active')) {
                     answer.style.maxHeight = answer.scrollHeight + "px";
-                    if(pawIcon) pawIcon.style.transform = 'rotate(180deg)';
+                    if(pawIcon) pawIcon.style.transform = 'rotate(180deg) scale(1.1)';
+                } else {
+                    answer.style.maxHeight = '0px';
+                    if(pawIcon) pawIcon.style.transform = 'rotate(0deg) scale(1)';
                 }
             });
         });
 
         const catImages = [
-            "imagenes/imagengato.jpeg", 
+            "imagenes/imagengato.jpeg",
             "imagenes/gatito2.jpg",
             "imagenes/gatito4.jpg",
-            "imagenes/gatito5.jpg"
+            "imagenes/gatito5.jpg",
+            "https://placehold.co/500x500/BCA075/4A3B32?text=Relaxed+Cat", 
+            "https://placehold.co/500x500/A1887F/FFFBF5?text=Happy+Feline"
         ];
         let currentImageIndex = 0;
         const carouselImageElement = document.getElementById('carouselImage');
@@ -1287,34 +1508,55 @@
 
         function showCatImage(index) {
             if (carouselImageElement) {
-                carouselImageElement.style.opacity = '0'; 
-                setTimeout(() => {
+                carouselImageElement.style.opacity = '0';
+                const img = new Image();
+                img.onload = () => {
                     carouselImageElement.src = catImages[index];
-                    carouselImageElement.style.opacity = '1'; 
-                }, 250); 
+                    carouselImageElement.style.opacity = '1';
+                };
+                img.onerror = () => { 
+                    carouselImageElement.src = 'https://placehold.co/500x500/E7BC91/4A3B32?text=Error+Loading';
+                    carouselImageElement.style.opacity = '1';
+                };
+                img.src = catImages[index];
             }
         }
 
         if (prevCatImageButton && nextCatImageButton && carouselImageElement) {
             prevCatImageButton.addEventListener('click', (e) => {
                 e.stopPropagation(); 
-                currentImageIndex--;
-                if (currentImageIndex < 0) {
-                    currentImageIndex = catImages.length - 1; 
-                }
+                currentImageIndex = (currentImageIndex - 1 + catImages.length) % catImages.length;
                 showCatImage(currentImageIndex);
             });
 
             nextCatImageButton.addEventListener('click', (e) => {
                 e.stopPropagation();
-                currentImageIndex++;
-                if (currentImageIndex >= catImages.length) {
-                    currentImageIndex = 0; 
-                }
+                currentImageIndex = (currentImageIndex + 1) % catImages.length;
                 showCatImage(currentImageIndex);
             });
         }
+        
+        const contactLinkFromAdoption = document.querySelector('.contact-link-from-adoption');
+        if (contactLinkFromAdoption) {
+            contactLinkFromAdoption.addEventListener('click', function(e) {
+                e.preventDefault();
+                const adopcionesModal = document.getElementById('adopcionesModal');
+                const contactoModalTarget = e.currentTarget.getAttribute('data-modal');
+                const contactoButton = document.querySelector(`.nav-button[data-modal="${contactoModalTarget}"]`) || document.querySelector(`button[data-modal="${contactoModalTarget}"]`);
 
+                if (adopcionesModal) {
+                    closeAnimatedModal(adopcionesModal); 
+                    setTimeout(() => {
+                        if (contactoButton) {
+                            openAnimatedModal(contactoModalTarget, contactoButton);
+                        } else {
+                             const modalToOpen = document.getElementById(contactoModalTarget);
+                             if(modalToOpen) displayModalContent(modalToOpen, modalToOpen.querySelector('.modal-content'));
+                        }
+                    }, 500); 
+                }
+            });
+        }
     </script>
 </body>
 </html>
