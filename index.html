@@ -20,7 +20,7 @@
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            position: relative;
+            position: relative; 
         }
         .header-logo { 
             max-height: 55px; 
@@ -28,6 +28,7 @@
             animation: fadeInDown 1s ease-out;
             display: block; 
             transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            margin-right: auto; 
         }
         .header-logo:hover {
             transform: scale(1.08); 
@@ -66,19 +67,19 @@
             }
             .header-logo {
                 max-height: 70px; 
+                margin-right: 0; 
             }
             .adoption-button {
                 position: absolute; 
                 right: 1.5rem;
                 top: 50%;
-                transform: translateY(-50%);
+                transform: translateY(-50%); 
                 padding: 0.6rem 1.2rem; 
                 font-size: 0.95rem;   
                 gap: 0.5rem;         
                 border-radius: 8px;    
             }
             .adoption-button:hover { 
-                background-color: #8D6E63; 
                 transform: translateY(-50%) translateY(-1px) scale(1.03); 
             }
             .adoption-button i {
@@ -301,6 +302,74 @@
             cursor: pointer;
             transform: scale(1.1);
         }
+
+        /* Estilos para las tarjetas de adopción */
+        .adoption-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .adoption-card {
+            background-color: #FDF6EC; 
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(121, 85, 72, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 420px; 
+        }
+        .adoption-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(121, 85, 72, 0.15);
+        }
+        .adoption-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .adoption-card-content {
+            padding: 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .adoption-card-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #8D6E63; 
+            margin-bottom: 0.5rem;
+        }
+        .adoption-card-content .description {
+            font-size: 0.9rem;
+            color: #6D4C41; 
+            margin-bottom: 0.75rem;
+            flex-grow: 1;
+        }
+        .adoption-card-content .details {
+            font-size: 0.85rem;
+            color: #A1887F; 
+            margin-bottom: 1rem;
+        }
+        .adoption-card-content .details p {
+            margin-bottom: 0.25rem;
+        }
+        .adoption-card-content .more-info-btn {
+            background-color: #A1887F;
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            text-decoration: none; 
+            display: inline-block;
+            margin-top: auto; 
+        }
+        .adoption-card-content .more-info-btn:hover {
+            background-color: #8D6E63;
+        }
+
 
         .stars-container {
             display: flex;
