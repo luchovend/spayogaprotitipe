@@ -514,6 +514,91 @@
             padding-top: 0.75rem; 
         }
 
+        /* Nueva Sección de Medios de Pago */
+        .new-payment-methods-section {
+            background-color: #FDF6EC; 
+            padding: 3rem 1rem 4rem 1rem;
+            text-align: center;
+        }
+        .new-payment-methods-section h2 {
+            color: #5D4037;
+            font-size: 2.5rem; 
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            text-shadow: 1px 1px 3px rgba(212, 162, 118, 0.3); 
+        }
+        .new-payment-methods-section .intro-text {
+            color: #8D6E63;
+            margin-bottom: 2.5rem;
+            max-width: 700px; 
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem; 
+            line-height: 1.7;
+        }
+        .payment-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 2rem; 
+            max-width: 900px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .payment-card {
+            background-color: #FFFFFF;
+            border-radius: 12px; 
+            border: 1px solid #E7BC91; 
+            box-shadow: 0 5px 15px rgba(121, 85, 72, 0.07);
+            padding: 1.75rem 1.5rem; 
+            text-align: left; 
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            min-height: 220px; 
+        }
+        .payment-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(121, 85, 72, 0.12);
+        }
+        .payment-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .payment-card-icon {
+            font-size: 2.2rem; 
+            color: #A1887F; 
+            margin-right: 0.75rem;
+            width: 40px; 
+            text-align: center;
+        }
+        .payment-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #5D4037;
+        }
+        .payment-card-description {
+            font-size: 0.9rem;
+            color: #6D4C41;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex-grow: 1; 
+        }
+        .payment-card-footer {
+            margin-top: auto; 
+            padding-top: 0.75rem;
+            border-top: 1px solid #F3E5F5; 
+        }
+        .payment-card-footer span, .payment-card-footer i {
+            font-size: 0.8rem;
+            color: #A1887F;
+            margin-right: 0.5rem;
+        }
+        .payment-card-footer .fab { 
+             font-size: 1.5rem;
+             margin-right: 0.3rem;
+        }
+
 
         .footer {
             background-color: #D4A276; 
@@ -699,6 +784,81 @@
                 </div>
             </div>
         </section>
+
+        <div class="section-divider"></div>
+        <section class="new-payment-methods-section">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4">Facilitamos tu Experiencia de Pago</h2>
+                <p class="intro-text text-center mb-12 max-w-3xl mx-auto">
+                    En SPAYOGA, tu comodidad es primordial. Por ello, ofrecemos diversas opciones seguras y prácticas para que elijas la que mejor se adapte a ti al momento de consentir a tu felino.
+                </p>
+                <div class="payment-card-grid">
+                    <div class="payment-card">
+                        <div class="payment-card-header">
+                            <i class="fas fa-credit-card payment-card-icon"></i>
+                            <h3 class="payment-card-title">Tarjetas de Crédito y Débito</h3>
+                        </div>
+                        <p class="payment-card-description">Aceptamos las principales tarjetas para pagos rápidos y seguros.</p>
+                        <div class="payment-card-footer">
+                            <i class="fab fa-cc-visa" title="Visa"></i>
+                            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                            <i class="fab fa-cc-amex" title="American Express"></i>
+                            <span>y otras...</span>
+                        </div>
+                    </div>
+                    <div class="payment-card">
+                        <div class="payment-card-header">
+                             <img src="https://img.icons8.com/color/48/000000/mercado-pago.png" alt="Mercado Pago" class="w-8 h-8 mr-2 opacity-90"/>
+                            <h3 class="payment-card-title">Mercado Pago</h3>
+                        </div>
+                        <p class="payment-card-description">Utiliza tu cuenta de Mercado Pago para una transacción ágil y protegida.</p>
+                        <div class="payment-card-footer">
+                            <span>Procesamiento inmediato</span>
+                        </div>
+                    </div>
+                    <div class="payment-card">
+                        <div class="payment-card-header">
+                            <i class="fas fa-university payment-card-icon"></i>
+                            <h3 class="payment-card-title">Transferencia Bancaria</h3>
+                        </div>
+                        <p class="payment-card-description">Realiza pagos directamente a nuestra cuenta bancaria de forma segura y confiable.</p>
+                         <div class="payment-card-footer">
+                            <span>Confirmación en 24-48 hs</span>
+                        </div>
+                    </div>
+                    <div class="payment-card">
+                        <div class="payment-card-header">
+                            <i class="fas fa-money-bill-wave payment-card-icon"></i>
+                            <h3 class="payment-card-title">Efectivo</h3>
+                        </div>
+                        <p class="payment-card-description">Puedes abonar en efectivo directamente en nuestras instalaciones al momento del servicio.</p>
+                        <div class="payment-card-footer">
+                            <span>Pago en el local</span>
+                        </div>
+                    </div>
+                     <div class="payment-card">
+                        <div class="payment-card-header">
+                            <i class="fas fa-qrcode payment-card-icon"></i>
+                            <h3 class="payment-card-title">Pagos con QR</h3>
+                        </div>
+                        <p class="payment-card-description">Escanea el código QR con tu aplicación de pagos móviles preferida.</p>
+                         <div class="payment-card-footer">
+                            <span>Rápido y sin contacto</span>
+                        </div>
+                    </div>
+                     <div class="payment-card">
+                        <div class="payment-card-header">
+                            <i class="fas fa-gift payment-card-icon"></i>
+                            <h3 class="payment-card-title">Tarjetas de Regalo SPAYOGA</h3>
+                        </div>
+                        <p class="payment-card-description">¡El regalo perfecto! Canjea tu tarjeta de regalo SPAYOGA por cualquiera de nuestros servicios.</p>
+                        <div class="payment-card-footer">
+                            <span>Consulta por nuestras gift cards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main> 
 
     <footer class="footer">
@@ -827,16 +987,16 @@
             
             if (!targetModal) return; 
 
-            if (buttonClone) { // Limpiar clon anterior si existe
+            if (buttonClone) {
                 buttonClone.remove();
                 buttonClone = null;
             }
-            if (activeAnimatedOriginalButton) { // Restaurar botón anterior si quedó oculto
-                activeAnimatedOriginalButton.style.opacity = originalButtonProps ? (originalButtonProps.originalOpacity || '1') : '1';
-                activeAnimatedOriginalButton.style.pointerEvents = originalButtonProps ? (originalButtonProps.originalPointerEvents || 'auto') : 'auto';
-                activeAnimatedOriginalButton = null;
+            if (activeAnimatedOriginalButton && originalButtonProps) { 
+                activeAnimatedOriginalButton.style.opacity = originalButtonProps.originalOpacity || '1';
+                activeAnimatedOriginalButton.style.pointerEvents = originalButtonProps.originalPointerEvents || 'auto';
             }
-            originalButtonProps = null;
+            activeAnimatedOriginalButton = null; // Resetear siempre
+            originalButtonProps = null; // Resetear siempre
             
             const shouldAnimateButton = isNavButton && window.innerWidth >= 768;
 
@@ -922,7 +1082,7 @@
                     modalElement.removeEventListener('transitionend', onBackdropFaded);
                     modalElement.style.display = 'none';
 
-                    const originalBtnToRestore = activeAnimatedOriginalButton; 
+                    const btnToRestore = activeAnimatedOriginalButton || (originalButtonProps ? originalButtonProps.element : null);
 
                     if (originalButtonProps && originalButtonProps.isAnimated && buttonClone) {
                         buttonClone.style.opacity = '1'; 
@@ -934,9 +1094,9 @@
                             if (event.target === buttonClone && (event.propertyName === 'transform' || event.propertyName === 'top' || event.propertyName === 'left')) {
                                 buttonClone.removeEventListener('transitionend', onCloneReturned);
                                 
-                                if (originalBtnToRestore) {
-                                    originalBtnToRestore.style.opacity = originalButtonProps.originalOpacity || '1'; 
-                                    originalBtnToRestore.style.pointerEvents = originalButtonProps.originalPointerEvents ||'auto'; 
+                                if (btnToRestore) {
+                                    btnToRestore.style.opacity = originalButtonProps.originalOpacity || '1'; 
+                                    btnToRestore.style.pointerEvents = originalButtonProps.originalPointerEvents ||'auto'; 
                                 }
                                 
                                 if (buttonClone) buttonClone.remove();
@@ -946,9 +1106,9 @@
                             }
                         });
                     } else {
-                        if (originalBtnToRestore) {
-                             originalBtnToRestore.style.opacity = originalButtonProps ? (originalButtonProps.originalOpacity || '1') : '1'; 
-                             originalBtnToRestore.style.pointerEvents = originalButtonProps ? (originalButtonProps.originalPointerEvents || 'auto') : 'auto'; 
+                        if (btnToRestore) {
+                             btnToRestore.style.opacity = originalButtonProps ? (originalButtonProps.originalOpacity || '1') : '1'; 
+                             btnToRestore.style.pointerEvents = originalButtonProps ? (originalButtonProps.originalPointerEvents || 'auto') : 'auto'; 
                         }
                         if (buttonClone) { 
                            buttonClone.remove();
