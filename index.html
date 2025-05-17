@@ -98,9 +98,9 @@
             background-color: #FFFFFF; 
             box-shadow: 0 4px 8px rgba(93, 64, 55, 0.1); 
             transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                        box-shadow 0.25s ease-out, 
-                        background-color 0.25s ease-out, 
-                        opacity 0.3s ease; 
+                        box-shadow 0.25s ease-in-out, 
+                        background-color 0.25s ease-in-out, 
+                        opacity 0.3s ease-out; 
             text-align: center;
             min-width: 220px; 
         }
@@ -210,10 +210,10 @@
         .animated-button-clone {
             position: fixed;
             z-index: 1060; 
-            transition: top 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
-                        left 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
-                        transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
-                        opacity 0.3s ease-out;
+            transition: top 0.4s ease-in-out, 
+                        left 0.4s ease-in-out, 
+                        transform 0.4s ease-in-out, 
+                        opacity 0.3s ease-out; 
             padding: 20px 32px; 
             border-radius: 10px; 
             font-weight: 500;
@@ -524,20 +524,20 @@
 
         .modal-image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
-            gap: 15px; 
-            margin-top: 20px; 
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 1rem; 
         }
         .modal-image {
             width: 100%;
-            height: 140px; 
+            height: 150px; 
             object-fit: cover;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.12); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .modal-image:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.18);
         }
         .map-container {
             width: 100%;
@@ -642,7 +642,19 @@
     <div id="sobreNosotrosModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-paw" style="color: #8D6E63; margin-right: 10px;"></i>Sobre Nosotros</h2> <p class="mb-4 text-base md:text-lg">En <strong>SPAYOGA</strong>, entendemos que los gatos no son solo mascotas, son miembros de la familia que merecen lo mejor. Nacimos de la pasión por el bienestar felino y el deseo de crear un espacio único donde los gatos puedan experimentar una relajación profunda y un cuidado especializado.</p> <p class="mb-4 text-base md:text-lg">Nuestra filosofía se centra en la tranquilidad y el respeto por la naturaleza sensible de cada gato. Ofrecemos una experiencia de spa de una hora, cuidadosamente diseñada en etapas, que combina técnicas de masaje suave, aromaterapia segura para felinos, musicoterapia relajante y un entorno sereno que invita al descanso y al ronroneo.</p> <p class="text-base md:text-lg">Creemos que un gato relajado es un gato feliz, y nuestra misión es proporcionar ese oasis de calma para tu compañero bigotudo. ¡Ven y descubre por qué SPAYOGA es el paraíso preferido de los gatos!</p> </div> </div>
     <div id="ubicacionModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-map-marker-alt" style="color: #8D6E63; margin-right: 10px;"></i>Ubicación</h2> <p class="mb-4 text-base md:text-lg">Encuéntranos en el corazón de la ciudad...</p> <div class="map-container"> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086436128009!2d144.95373531590412!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d5f3600979e3!2sFederation%20Square!5e0!3m2!1ses!2sar!4v1652712186504!5m2!1ses!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> </div> <a href="https://maps.app.goo.gl/525DyHKWu5vavMV57" target="_blank" class="mt-6 inline-block text-white py-3 px-6 rounded hover:bg-8D6E63 transition-colors duration-300 text-lg" style="background-color: #A1887F;">Abrir en Google Maps</a> </div> </div>
     <div id="contactoModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-address-book" style="color: #8D6E63; margin-right: 10px;"></i>Contacto</h2> <p class="mb-4 contact-item text-lg"><i class="fas fa-phone-alt"></i><strong>Número de celular:</strong> <a href="tel:+543765233400" class="hover:underline text-brown-700">+54 3765 233400</a></p> <p class="mb-4 contact-item text-lg"><i class="fas fa-envelope"></i><strong>Correo:</strong> <a href="mailto:spayogaemp@gmail.com" class="hover:underline text-brown-700">spayogaemp@gmail.com</a></p> <p class="contact-item text-lg"><i class="fab fa-instagram"></i><strong>Instagram:</strong> <a href="https://instagram.com/SpaYogaok" target="_blank" class="hover:underline text-brown-700">@SpaYogaok</a></p> </div> </div>
-    <div id="experienciasModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-star" style="color: #8D6E63; margin-right: 10px;"></i>Experiencias SPAYOGA</h2> <p class="mb-4 text-base md:text-lg">Nuestros clientes felinos (¡y sus humanos!) nos otorgan <strong>5 estrellas de satisfacción</strong>. [Más testimonios y galería de fotos próximamente...]</p> <div class="modal-image-grid grid-cols-2"> <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+1" alt="Gatito feliz 1 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+2" alt="Gatito feliz 2 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> </div> </div> </div>
+    <div id="experienciasModal" class="modal"> 
+        <div class="modal-content"> 
+            <span class="close-button">×</span> 
+            <h2><i class="fas fa-star" style="color: #8D6E63; margin-right: 10px;"></i>Experiencias SPAYOGA</h2> 
+            <p class="mb-4 text-base md:text-lg">Nuestros clientes felinos (¡y sus humanos!) nos otorgan <strong>5 estrellas de satisfacción</strong>. ¡Sus sonrisas (y ronroneos) lo dicen todo!</p> 
+            <div class="modal-image-grid"> 
+                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+1" alt="Gatito feliz 1 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
+                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+2" alt="Gatito feliz 2 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
+                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+3" alt="Gatito feliz 3 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
+                <img src="https://placehold.co/200x200/E7BC91/5D4037?text=Gatito+Feliz+4" alt="Gatito feliz 4 en SPAYOGA" class="modal-image" onerror="this.onerror=null; this.src='https://placehold.co/200x200/E7BC91/5D4037?text=Imagen+no+disponible';"> 
+            </div> 
+        </div> 
+    </div>
     <div id="informacionModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-info-circle" style="color: #8D6E63; margin-right: 10px;"></i>Solicitar Información</h2> <p class="mb-6 text-base md:text-lg">¿Interesado en regalarle a tu gato una experiencia SPAYOGA? Completa el formulario y nos pondremos en contacto contigo.</p> <form id="contactForm"> <input type="text" name="nombre" placeholder="Nombre y Apellido" class="form-input" required> <input type="email" name="email" placeholder="Correo Electrónico" class="form-input" required> <input type="tel" name="telefono" placeholder="Número de Teléfono" class="form-input" required> <input type="text" name="localidad" placeholder="Localidad" class="form-input" required> <button type="submit" class="submit-button">Enviar Formulario</button> </form> <div id="formMessage" class="mt-4 text-center"></div> </div> </div>
     <div id="felinosModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-cat" style="color: #8D6E63; margin-right: 10px;"></i>Universo Felino</h2> <p class="mb-4 text-base md:text-lg">[Contenido de la sección Felinos en desarrollo. ¡Pronto más curiosidades sobre nuestros amigos bigotudos!]</p> </div> </div>
     <div id="termsModal" class="modal"> <div class="modal-content"> <span class="close-button">×</span> <h2><i class="fas fa-file-contract" style="color: #8D6E63; margin-right: 10px;"></i>Términos y Condiciones</h2> <p class="mb-4 text-base md:text-lg">Bienvenido a SPAYOGA... [Términos completos en desarrollo]</p> </div> </div>
@@ -735,7 +747,7 @@
     </div>
 
     <script>
-        let currentAnimatedButton = null;
+        let activeAnimatedOriginalButton = null; // Rastrea el botn original de una animacion que se esta realizando
         let originalButtonProps = null;
         let buttonClone = null;
 
@@ -746,22 +758,36 @@
             const targetModal = document.getElementById(modalId);
             
             if (!targetModal) return; 
+
+            // Limpia las animaciones anteriores que se activaron
+            if (buttonClone) {
+                buttonClone.remove();
+                buttonClone = null;
+            }
+            if (activeAnimatedOriginalButton) {
+                activeAnimatedOriginalButton.style.opacity = '1';
+                activeAnimatedOriginalButton.style.pointerEvents = 'auto';
+                activeAnimatedOriginalButton = null;
+            }
+            originalButtonProps = null;
             
             const shouldAnimateButton = isNavButton && window.innerWidth >= 768;
-
 
             const targetModalContent = targetModal.querySelector('.modal-content');
 
             originalButtonProps = {
+                element: buttonElement,
                 rect: buttonElement.getBoundingClientRect(),
                 text: buttonElement.innerHTML,
-                isAnimated: shouldAnimateButton 
+                isAnimated: shouldAnimateButton,
+                originalOpacity: buttonElement.style.opacity || '',
+                originalPointerEvents: buttonElement.style.pointerEvents || ''
             };
             
             if (shouldAnimateButton) { 
+                activeAnimatedOriginalButton = buttonElement; // Marcar boton actual como activo para la animacion
                 buttonElement.style.opacity = '0'; 
                 buttonElement.style.pointerEvents = 'none'; 
-
 
                 buttonClone = document.createElement('div');
                 buttonClone.innerHTML = originalButtonProps.text;
@@ -829,6 +855,8 @@
                     modalElement.removeEventListener('transitionend', onBackdropFaded);
                     modalElement.style.display = 'none';
 
+                    const originalBtnToRestore = activeAnimatedOriginalButton; 
+
                     if (originalButtonProps && originalButtonProps.isAnimated && buttonClone) {
                         buttonClone.style.opacity = '1'; 
                         buttonClone.style.top = `${originalButtonProps.rect.top}px`;
@@ -839,28 +867,28 @@
                             if (event.target === buttonClone && (event.propertyName === 'transform' || event.propertyName === 'top' || event.propertyName === 'left')) {
                                 buttonClone.removeEventListener('transitionend', onCloneReturned);
                                 
-                                const originalBtn = document.querySelector(`[data-modal="${modalElement.id}"], #${modalElement.id.replace('Modal','Link')}`);
-                                if (originalBtn) {
-                                    originalBtn.style.opacity = '1'; 
-                                    originalBtn.style.pointerEvents = 'auto'; 
+                                if (originalBtnToRestore) {
+                                    originalBtnToRestore.style.opacity = originalButtonProps.originalOpacity || '1'; 
+                                    originalBtnToRestore.style.pointerEvents = originalButtonProps.originalPointerEvents ||'auto'; 
                                 }
                                 
                                 if (buttonClone) buttonClone.remove();
                                 buttonClone = null;
+                                activeAnimatedOriginalButton = null; 
                                 originalButtonProps = null; 
                             }
                         });
                     } else {
-                        const originalBtn = document.querySelector(`[data-modal="${modalElement.id}"], #${modalElement.id.replace('Modal','Link')}`);
-                        if (originalBtn) {
-                             originalBtn.style.opacity = '1'; 
-                             originalBtn.style.pointerEvents = 'auto'; 
+                        if (originalBtnToRestore) {
+                             originalBtnToRestore.style.opacity = originalButtonProps ? (originalButtonProps.originalOpacity || '1') : '1'; 
+                             originalBtnToRestore.style.pointerEvents = originalButtonProps ? (originalButtonProps.originalPointerEvents || 'auto') : 'auto'; 
                         }
-                        originalButtonProps = null; 
                         if (buttonClone) { 
                            buttonClone.remove();
                            buttonClone = null;
                         }
+                        activeAnimatedOriginalButton = null; 
+                        originalButtonProps = null; 
                     }
 
                     if (!Array.from(document.querySelectorAll('.modal.active')).length) {
@@ -990,7 +1018,6 @@
 
         if(submitRatingCommentButton) {
             submitRatingCommentButton.addEventListener('click', () => {
-                // const comment = ratingCommentTextarea.value; 
                 if (commentFormContainer) commentFormContainer.style.display = 'none';
                 if (commentSubmitMessage) {
                     commentSubmitMessage.style.display = 'block';
