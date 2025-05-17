@@ -747,7 +747,7 @@
     </div>
 
     <script>
-        let activeAnimatedOriginalButton = null; // Rastrea el botn original de una animacion que se esta realizando
+        let activeAnimatedOriginalButton = null; // Rastrea el botón original de una animación activa
         let originalButtonProps = null;
         let buttonClone = null;
 
@@ -759,7 +759,7 @@
             
             if (!targetModal) return; 
 
-            // Limpia las animaciones anteriores que se activaron
+            // Limpieza de animaciones previas interrumpidas
             if (buttonClone) {
                 buttonClone.remove();
                 buttonClone = null;
@@ -785,7 +785,7 @@
             };
             
             if (shouldAnimateButton) { 
-                activeAnimatedOriginalButton = buttonElement; // Marcar boton actual como activo para la animacion
+                activeAnimatedOriginalButton = buttonElement; // Marcar botón actual como activo para animación
                 buttonElement.style.opacity = '0'; 
                 buttonElement.style.pointerEvents = 'none'; 
 
@@ -855,7 +855,7 @@
                     modalElement.removeEventListener('transitionend', onBackdropFaded);
                     modalElement.style.display = 'none';
 
-                    const originalBtnToRestore = activeAnimatedOriginalButton; 
+                    const originalBtnToRestore = activeAnimatedOriginalButton; // Usar la referencia guardada
 
                     if (originalButtonProps && originalButtonProps.isAnimated && buttonClone) {
                         buttonClone.style.opacity = '1'; 
